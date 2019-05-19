@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 // REVER
 
-public enum TipoDocumento {
+public enum ValidadorDocumento {
 
 	CPF, CNPJ;
 

@@ -7,8 +7,12 @@ import javafx.stage.Stage;
 
 public class Principal extends Application{
 		private String usuario;
+	
 		
 		
+	public Principal(String usuario) {
+			this.usuario = usuario;
+		}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
