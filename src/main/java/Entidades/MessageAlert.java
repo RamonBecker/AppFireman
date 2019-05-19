@@ -9,6 +9,14 @@ public class MessageAlert {
 		Alert mensagemAviso = new Alert(AlertType.WARNING);
 		mensagemAviso.setTitle("WARNING");
 		mensagemAviso.setHeaderText(Strings.usuarioIncorreto + " ou " + Strings.senhaIncorreta);
-		mensagemAviso.showAndWait();
+		mensagemAviso.show();
+	}
+	
+	public static void messsageImageNotFound() {
+		Alert mensagemErro = new Alert(AlertType.ERROR);
+		mensagemErro.setTitle("ERRO");
+		mensagemErro.setHeaderText(Strings.erroImagem);
+		mensagemErro.show();
+		
 	}
 }
