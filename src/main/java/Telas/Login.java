@@ -4,8 +4,9 @@ package Telas;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+
+import Alert.MessageAlert;
 import Entidades.ControladorImagem;
-import Entidades.MessageAlert;
 import Entidades.Strings;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -85,7 +86,7 @@ public class Login extends Application {
 		imgView.setLayoutY(10);
 
 		// CRIANDO BUTTON ENTRAR
-		btnLogin = new JFXButton(Strings.login);
+		btnLogin = new JFXButton(Strings.btnLogin);
 		btnLogin.setLayoutX(190);
 		btnLogin.setLayoutY(270);
 
@@ -114,6 +115,7 @@ public class Login extends Application {
 		stage.setResizable(true);
 		stage.setScene(scene);
 		stage.show();
+		
 	}
 
 	private void login(Stage stage, JFXTextField usuario, JFXPasswordField senha) {
