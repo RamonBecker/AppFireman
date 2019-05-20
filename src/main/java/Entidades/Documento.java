@@ -14,7 +14,7 @@ public class Documento {
 
 		if (numDoc.trim().length() == 11 && validaDoc == ValidadorDocumento.CPF) {
 			if (validaDoc.validarCPF(numDoc)) {
-				MessageAlert.cadastroRealizadoSucesso(Strings.mensagemCPF);
+				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCPF);
 				this.numDocumento = numDoc;
 			} else {
 				throw new Exception("CPF Invalido");
@@ -23,7 +23,7 @@ public class Documento {
 		
 		if(numDoc.trim().length() == 11 && validaDoc == ValidadorDocumento.CNPJ) {
 			if(validaDoc.validarCNPJ(numDoc)) {
-				MessageAlert.cadastroRealizadoSucesso(Strings.mensagemCNPJ);
+				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
 				this.numDocumento = numDoc;
 			}else {
 				throw new Exception("CNPJ Inválido");

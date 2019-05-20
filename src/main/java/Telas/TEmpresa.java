@@ -1,12 +1,9 @@
 package Telas;
 
-import java.util.ArrayList;
-
-import javax.swing.text.Document;
-
 import com.jfoenix.controls.JFXButton;
 
-import Cadastro.ControladorEmpresa;
+import Alert.MessageAlert;
+import Controladores.ControladorEmpresa;
 import Entidades.Documento;
 import Entidades.Empresa;
 import Entidades.Endereco;
@@ -15,10 +12,14 @@ import Entidades.ValidadorDocumento;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TEmpresa extends Application {
@@ -43,20 +44,24 @@ public class TEmpresa extends Application {
 	private Label lbCep;
 	private Label lbEstado;
 	private Label lbNumero;
+	private Label lbEmpresa;
 	private JFXButton btnCadastrar;
 
-//	public Empresa(String usuario) {
-//		this.usuario = usuario;
-//	}
-	public static void main(String[] args) {
-		launch(args);
+	public TEmpresa(String usuario) {
+		this.usuario = usuario;
 	}
-
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		AnchorPane pane = new AnchorPane();
 		pane.setPrefSize(700, 400);
 		Scene scene = new Scene(pane);
+
+		// CRIANDO LABEL Empresa
+		lbEmpresa = new Label(Strings.lbEmpresa);
+		lbEmpresa.setStyle("-fx-font-size: 14px;");
+		lbEmpresa.setLayoutX(250);
+		lbEmpresa.setLayoutY(33);
 
 		// Criando Textfield nome
 
@@ -85,86 +90,84 @@ public class TEmpresa extends Application {
 		txfNomefantasia.setLayoutY(70);
 
 		// CRIANDO LABEL Nome fantasia
-		lbNomeFantasia = new Label(Strings.lbNomefantasia+":");
+		lbNomeFantasia = new Label(Strings.lbNomefantasia + ":");
 		lbNomeFantasia.setLayoutX(430);
 		lbNomeFantasia.setLayoutY(70);
-		
+
 		// Criando Textfield Telefone
 		txfTelefone = new TextField();
 		txfTelefone.setLayoutX(70);
 		txfTelefone.setLayoutY(100);
 		txfTelefone.setPrefWidth(138);
-		
+
 		// CRIANDO LABEL Telefone
-		
-		lbTelefone = new Label(Strings.lbTelefone+": ");
+
+		lbTelefone = new Label(Strings.lbTelefone + ": ");
 		lbTelefone.setLayoutX(20);
 		lbTelefone.setLayoutY(100);
-		
-		
+
 		// Criando Textfield Rua
-		
+
 		txfRua = new TextField();
 		txfRua.setLayoutX(260);
 		txfRua.setLayoutY(100);
-		
+
 		// CRIANDO LABEL Rua
-		lbRua = new Label(Strings.lbRua+": ");
+		lbRua = new Label(Strings.lbRua + ": ");
 		lbRua.setLayoutX(230);
 		lbRua.setLayoutY(100);
-		
+
 		// Criando Textfield Bairro
 		txfBairro = new TextField();
 		txfBairro.setLayoutX(520);
 		txfBairro.setLayoutY(100);
 
 		// CRIANDO LABEL Bairro
-		lbBairro = new Label(Strings.lbBairro+":");
+		lbBairro = new Label(Strings.lbBairro + ":");
 		lbBairro.setLayoutX(480);
 		lbBairro.setLayoutY(100);
-		
+
 		// Criando Textfield Cidade
 		txfCidade = new TextField();
 		txfCidade.setLayoutX(60);
 		txfCidade.setLayoutY(130);
-		
+
 		// CRIANDO LABEL Cidade
-		lbCidade = new Label(Strings.lbCidade+":");
+		lbCidade = new Label(Strings.lbCidade + ":");
 		lbCidade.setLayoutX(20);
 		lbCidade.setLayoutY(130);
-		
+
 		// Criando Textfield CEP
 		txfCep = new TextField();
 		txfCep.setLayoutX(260);
 		txfCep.setLayoutY(130);
-		
+
 		// CRIANDO LABEL CEP
-		lbCep = new Label(Strings.lbCep+":");
+		lbCep = new Label(Strings.lbCep + ":");
 		lbCep.setLayoutX(230);
 		lbCep.setLayoutY(130);
-		
+
 		// Criando Textfield Estado
 		txfEstado = new TextField();
 		txfEstado.setLayoutX(520);
 		txfEstado.setLayoutY(130);
-		
+
 		// CRIANDO LABEL Estado
-		lbEstado = new Label(Strings.lbEstado+":");
+		lbEstado = new Label(Strings.lbEstado + ":");
 		lbEstado.setLayoutX(480);
 		lbEstado.setLayoutY(130);
-		
+
 		// Criando Textfield Numero
 		txfNumero = new TextField();
 		txfNumero.setLayoutX(60);
 		txfNumero.setLayoutY(160);
-		
-		
+
 		// CRIANDO LABEL Numero
-		lbNumero = new Label(Strings.lbNumero+":");
+		lbNumero = new Label(Strings.lbNumero + ":");
 		lbNumero.setLayoutX(13);
 		lbNumero.setLayoutY(160);
-		
-		//CRIANDO BUTTON CADASTRAR
+
+		// CRIANDO BUTTON CADASTRAR
 		btnCadastrar = new JFXButton(Strings.btnCadastrar);
 		btnCadastrar.setLayoutX(260);
 		btnCadastrar.setLayoutY(220);
@@ -173,19 +176,40 @@ public class TEmpresa extends Application {
 				+ "    -jfx-button-type: RAISED;\r\n" + "    -fx-background-color: rgb(155, 10, 7);\r\n"
 				+ "    -fx-pref-width: 100;\r\n" + "    -fx-text-fill: WHITE;");
 
-		
-		//AÇÃO DO BOTAO CADASTRAR
-		
+		// ADICIONANDO MENU
+		Menu menu = new Menu("Menu");
+		MenuItem menuItem1 = new MenuItem("Voltar");
+
+		menu.getItems().add(menuItem1);
+		MenuBar menuBar = new MenuBar();
+
+		menuBar.getMenus().add(menu);
+		VBox vb = new VBox(1, menuBar);
+		vb.setPrefSize(700, 40);
+
+		// AÇÃO DOS BOTÕES
+		// AÇÃO DO BOTAO CADASTRAR
+
 		btnCadastrar.setDefaultButton(true);
-		btnCadastrar.setOnKeyPressed((KeyEvent t) ->{
-			if(t.getCode() == KeyCode.ENTER) {
-				cadastrarEmpresa(txfNome, txfCnpj, txfRua, txfBairro,  txfCidade, txfEstado
-				,txfCep, txfNumero, txfNomefantasia, txfTelefone);
+		btnCadastrar.setOnKeyPressed((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ENTER) {
+				cadastrarEmpresa(txfNome, txfCnpj, txfRua, txfBairro, txfCidade, txfEstado, txfCep, txfNumero,
+						txfNomefantasia, txfTelefone);
 			}
 		});
+
+		btnCadastrar.setOnAction(e -> cadastrarEmpresa(txfNome, txfCnpj, txfRua, txfBairro, txfCidade, txfEstado,
+				txfCep, txfNumero, txfNomefantasia, txfTelefone));
+
+		//AÇÃO DO BOTÃO MENU ITEM VOLTAR
 		
-		btnCadastrar.setOnAction(e -> cadastrarEmpresa(txfNome, txfCnpj, txfRua, txfBairro,  txfCidade, txfEstado
-				,txfCep, txfNumero, txfNomefantasia, txfTelefone));
+		menuItem1.setOnAction(e -> voltar(stage));
+		scene.setOnKeyPressed((KeyEvent t) ->{
+		    if(t.getCode() == KeyCode.ESCAPE) {
+		    	voltar(stage);
+		    }
+		});
+		
 		
 		
 		// ADICIONANDO COMPONENTE NA TELA
@@ -210,30 +234,34 @@ public class TEmpresa extends Application {
 		pane.getChildren().add(btnCadastrar);
 		pane.getChildren().add(txfNumero);
 		pane.getChildren().add(lbNumero);
+		pane.getChildren().add(lbEmpresa);
+		pane.getChildren().add(vb);
+
+		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+
 	private void cadastrarEmpresa(TextField txfNome, TextField txfCnpj, TextField txfRua, TextField txfBairro,
-			TextField txfCidade, TextField txfEstado, TextField txfCep, TextField  txfNumero, TextField txfNomefantasia,
-			TextField txfTelefone
-			) {
-		
+			TextField txfCidade, TextField txfEstado, TextField txfCep, TextField txfNumero, TextField txfNomefantasia,
+			TextField txfTelefone) {
+
 		Documento documento = null;
-		
-	
+
 		try {
 			documento = new Documento(txfCnpj.getText(), ValidadorDocumento.CNPJ);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		Endereco endereco = new Endereco(txfRua.getText(), txfBairro.getText(), txfCidade.getText(), txfEstado.getText(), txfCep.getText(), txfNumero.getText());
-		
-		Empresa empresa = new Empresa(txfNome.getText(), endereco, documento, txfNomefantasia.getText(), txfTelefone.getText());
+
+		Endereco endereco = new Endereco(txfRua.getText(), txfBairro.getText(), txfCidade.getText(),
+				txfEstado.getText(), txfCep.getText(), txfNumero.getText());
+
+		Empresa empresa = new Empresa(txfNome.getText(), endereco, documento, txfNomefantasia.getText(),
+				txfTelefone.getText());
 		ControladorEmpresa controladorEmpresa = new ControladorEmpresa();
 		controladorEmpresa.cadastrarEmpresa(empresa);
-		
+
 		txfRua.setText("");
 		txfNome.setText("");
 		txfBairro.setText("");
@@ -243,5 +271,11 @@ public class TEmpresa extends Application {
 		txfTelefone.setText("");
 		txfNumero.setText("");
 		txfEstado.setText("");
+	}
+
+	private void voltar(Stage stage) {
+		stage.close();
+		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
+		new TPrincipal(usuario);
 	}
 }

@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import Alert.MessageAlert;
-import Entidades.ControladorImagem;
+import Controladores.ControladorImagem;
 import Entidades.Strings;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -122,7 +122,7 @@ public class Login extends Application {
 
 		if (usuario.getText().trim().equals("admin") && senha.getText().trim().equals("admin")) {
 			try {
-				new Principal(usuario.getText().trim()).start(new Stage());
+				new TPrincipal(usuario.getText().trim()).start(new Stage());
 				stage.close();
 			} catch (Exception e) {
 				e.printStackTrace();

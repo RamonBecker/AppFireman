@@ -1,4 +1,4 @@
-package Cadastro;
+package Controladores;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,6 @@ public class ControladorEmpresa {
 	public void cadastrarEmpresa(Empresa empresa) {
 		empresasCadastradas = new ArrayList<Empresa>();
 		empresasCadastradas.add(empresa);
-		MessageAlert.cadastroRealizadoSucesso(Strings.mensagemEmpresa);
+		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemEmpresa);
 	}
 }

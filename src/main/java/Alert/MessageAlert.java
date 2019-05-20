@@ -13,7 +13,7 @@ public class MessageAlert {
 		mensagemAviso.show();
 	}
 	
-	public static void cadastroRealizadoSucesso(String mensagem) {
+	public static void mensagemRealizadoSucesso(String mensagem) {
 		Alert mensagemAlert = new Alert(AlertType.INFORMATION);
 		mensagemAlert.setHeaderText(mensagem);
 		mensagemAlert.show();

@@ -40,10 +40,13 @@ public  class  Strings {
 	public static final String lblUsuario = "Usuário";
 	public static final String lblSenha = "Senha";
 	public static final String lbNumero = "Número";
+	public static final String lbEmpresa = "Cadastrar Empresa";
 	
+	//Mensagens
 	public static final String mensagemEmpresa = "Empresa Cadastrada com sucesso";
 	public static final String mensagemCPF = "CPF válido";
 	public static final String mensagemCNPJ = "CNPJ válido";
-	
+	public static final String mensagemSair = "Saindo do programa";
+	public static final String mensagemVoltarTelaPrincipal = "Voltando para a tela principal";
 	
 }

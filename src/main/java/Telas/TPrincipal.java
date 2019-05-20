@@ -3,27 +3,29 @@ package Telas;
 import com.jfoenix.controls.JFXButton;
 
 import Alert.MessageAlert;
-import Entidades.ControladorImagem;
+import Controladores.ControladorImagem;
 import Entidades.Strings;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Principal extends Application {
+public class TPrincipal extends Application {
 	private String usuario;
 	private JFXButton btnCadastroEmpresa;
 	private JFXButton btnCadastroVistoria;
-	private JFXButton btnLogout;
 	private Label labelCadastroEmpresa;
 	private Label labelCadastroVistoria;
-	private Label labelSair;
 
-	public Principal(String usuario) {
+	public TPrincipal(String usuario) {
 		this.usuario = usuario;
 	}
 
@@ -32,7 +34,7 @@ public class Principal extends Application {
 
 		AnchorPane pane = new AnchorPane();
 		Scene scene = new Scene(pane);
-		pane.setPrefSize(600, 500);
+		pane.setPrefSize(500, 400);
 
 		// CRIANDO BUTTON CADASTRO DE EMPRESAS
 		btnCadastroEmpresa = new JFXButton();
@@ -44,11 +46,13 @@ public class Principal extends Application {
 		imgCadastroEmpresa.setFitHeight(70);
 		imgCadastroEmpresa.setFitWidth(70);
 		btnCadastroEmpresa.setGraphic(imgCadastroEmpresa);
-		btnCadastroEmpresa.setLayoutY(20);
+		btnCadastroEmpresa.setLayoutX(83);
+		btnCadastroEmpresa.setLayoutY(150);
 
 		// CRIANDO LABEL Cadastro empresa
 		labelCadastroEmpresa = new Label(Strings.btnCadastroEmpresas);
-		labelCadastroEmpresa.setLayoutY(100);
+		labelCadastroEmpresa.setLayoutX(76);
+		labelCadastroEmpresa.setLayoutY(235);
 
 		// CRIANDO BUTTON CADASTRO VISTORIA
 		btnCadastroVistoria = new JFXButton();
@@ -59,61 +63,74 @@ public class Principal extends Application {
 		imgCadastroVistoria.setFitHeight(70);
 		imgCadastroVistoria.setFitWidth(70);
 		btnCadastroVistoria.setGraphic(imgCadastroVistoria);
-		btnCadastroVistoria.setLayoutX(100);
-		btnCadastroVistoria.setLayoutY(20);
+		btnCadastroVistoria.setLayoutX(220);
+		btnCadastroVistoria.setLayoutY(150);
 
 		// CRIANDO LABEL Cadastro Vistoria
 		labelCadastroVistoria = new Label(Strings.btnCadastroVistorias);
-		labelCadastroVistoria.setLayoutY(100);
-		labelCadastroVistoria.setLayoutX(122);
+		labelCadastroVistoria.setLayoutX(230);
+		labelCadastroVistoria.setLayoutY(235);
 
-		// CRIANDO BUTTON LOGOUT
+		// ADICIONANDO MENU
+		Menu m = new Menu("Menu");
+		MenuItem m1 = new MenuItem("Sair");
 
-		btnLogout = new JFXButton();
+		m.getItems().add(m1);
+		MenuBar mb = new MenuBar();
 
-		// CARREGANDO IMAGEM
-		ImageView imgLogout = new ImageView(ControladorImagem.carregarImagem(Strings.urlImagem, Strings.urlLogoSair));
-		imgLogout.setFitHeight(70);
-		imgLogout.setFitWidth(70);
-		btnLogout.setGraphic(imgLogout);
-		btnLogout.setLayoutX(180);
-		btnLogout.setLayoutY(20);
-
-		// CRIANDO LABEL Sair
-		labelSair = new Label(Strings.urlLogoSair);
+		mb.getMenus().add(m);
+		VBox vb = new VBox(1, mb);
+		vb.setPrefSize(500, 40);
 
 		// ADICIONANDO COMPONENTES NO PANE
+
 		pane.getChildren().add(btnCadastroEmpresa);
 		pane.getChildren().add(btnCadastroVistoria);
-		pane.getChildren().add(btnLogout);
 		pane.getChildren().add(labelCadastroEmpresa);
 		pane.getChildren().add(labelCadastroVistoria);
-		
+		pane.getChildren().add(vb);
+
 		// AÇÕES DOS BOTÕES
 
+		//AÇÃO DO BOTÃO EMPRESA
+		acaoBotaoEmpresa(btnCadastroEmpresa, stage);
+		
+		// AÇÃO DO MENU SAIR
+		m1.setOnAction(e -> sair(stage));
+
 		// BOTAO EMPRESA
+
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	public void acaoBotaoEmpresa(JFXButton btnCadastroEmpresa, Stage stage) {
+
 		btnCadastroEmpresa.setDefaultButton(false);
 		btnCadastroEmpresa.setOnKeyPressed((KeyEvent t) -> {
 			if (t.getCode() == KeyCode.ENTER) {
 				telaEmpresa(stage);
 			}
 		});
-		
-		
+
 		btnCadastroEmpresa.setOnAction(e -> telaEmpresa(stage));
 
-		stage.setScene(scene);
-		stage.show();
 	}
 
 	private void telaEmpresa(Stage stage) {
 		try {
 			new TEmpresa(usuario).start(new Stage());
-			// stage.close();
 		} catch (Exception e) {
-			MessageAlert.mensagemErro(Strings.erroTela);;
+			MessageAlert.mensagemErro(Strings.erroTela);
+			;
 			e.printStackTrace();
 		}
 		;
 	}
+
+	public void sair(Stage stage) {
+		stage.close();
+		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemSair);
+	}
+
 }

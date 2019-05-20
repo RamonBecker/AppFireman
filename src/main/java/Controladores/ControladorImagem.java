@@ -1,9 +1,10 @@
-package Entidades;
+package Controladores;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import Alert.MessageAlert;
+import Entidades.Strings;
 import javafx.scene.image.Image;
 
 
