@@ -1,16 +1,12 @@
 package Telas;
 
-import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
-
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
-import Entidades.Documento;
 import Entidades.Empresa;
 import Entidades.Endereco;
 import Entidades.Strings;
-import Entidades.ValidadorDocumento;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -21,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -248,19 +243,18 @@ public class TEmpresa extends Application {
 			TextField txfCidade, TextField txfEstado, TextField txfCep, TextField txfNumero, TextField txfNomefantasia,
 			TextField txfTelefone) {
 
-		Documento documento = null;
-
-		try {
-			documento = new Documento(txfCnpj.getText(), ValidadorDocumento.CNPJ);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		Endereco endereco = new Endereco(txfRua.getText(), txfBairro.getText(), txfCidade.getText(),
 				txfEstado.getText(), txfCep.getText(), txfNumero.getText());
 
-		Empresa empresa = new Empresa(txfNome.getText(), endereco, documento, txfNomefantasia.getText(),
-				txfTelefone.getText());
+		Empresa empresa = null;
+		
+		try {
+			empresa = new Empresa(txfNome.getText(), endereco,txfNomefantasia.getText(), txfCnpj.getText(), 
+					txfTelefone.getText());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		ControladorEmpresa.getInstance().cadastrarEmpresa(empresa);;
 	

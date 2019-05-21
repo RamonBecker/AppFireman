@@ -8,7 +8,7 @@ public enum ValidadorDocumento {
 
 	CPF, CNPJ;
 
-	public boolean validarCPF(String cpf) {
+	public static boolean validarCPF(String cpf) {
 		boolean valido = true;
 		int primeiroDigito = 0, segundoDigito = 0, indiceAuxPriDigito = 10, indiceAuxSegDigito = 11;
 
@@ -111,7 +111,7 @@ public enum ValidadorDocumento {
 		return valido;
 	}
 
-	public boolean validarCNPJ(String cnpj) {
+	public static boolean validarCNPJ(String cnpj) {
 
 		int primeiroDigito = 0, segundoDigito = 0, indiceAuxiliar = 1;
 		boolean valido = true;
