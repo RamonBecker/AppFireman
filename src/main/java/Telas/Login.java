@@ -90,7 +90,7 @@ public class Login extends Application {
 		btnLogin.setLayoutX(190);
 		btnLogin.setLayoutY(270);
 
-		btnLogin.setStyle("-fx-padding: 0.7em 0.57em;\r\n" + "    -fx-font-size: 14px;\r\n"
+		btnLogin.setStyle("-fx-padding: 0.7em 0.57em;\r\n" + "-fx-font-size: 14px;\r\n"
 				+ "    -jfx-button-type: RAISED;\r\n" + "    -fx-background-color: rgb(155, 10, 7);\r\n"
 				+ "    -fx-pref-width: 100;\r\n" + "    -fx-text-fill: WHITE;");
 

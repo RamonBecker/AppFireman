@@ -7,17 +7,9 @@ public abstract class PessoaJuridica extends Pessoa {
 	private String cnpj;
 	
 
-	public PessoaJuridica(String nome, String cnpj) throws Exception {
+	public PessoaJuridica(String nome, String cnpj)  {
 		super(nome);
-		if(cnpj.trim().length() == 14) {
-			if(ValidadorDocumento.validarCNPJ(cnpj)) {
-				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
-				this.cnpj = cnpj;
-			}else {
-				throw new Exception("CNPJ Inválido");
-			}
-		}
-		
+		this.cnpj = cnpj;
 	}
 	
 	public PessoaJuridica(String nome, Endereco endereco, String nomeFantasia, String cnpj) throws Exception {
@@ -83,7 +75,16 @@ public abstract class PessoaJuridica extends Pessoa {
 		return cnpj;
 	}
 
-	public void setCnpj(String cnpj) {
+	public void setCnpj(String cnpj) throws Exception {
+		
+		if(cnpj.trim().length() == 14) {
+			if(ValidadorDocumento.validarCNPJ(cnpj)) {
+				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
+				this.cnpj = cnpj;
+			}else {
+				throw new Exception("CNPJ Inválido");
+			}
+		}
 		this.cnpj = cnpj;
 	}
 }

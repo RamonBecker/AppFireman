@@ -38,7 +38,7 @@ public class Empresa extends PessoaJuridica {
 	
 	
 	
-	public Empresa(String nome, String cnpj) throws Exception {
+	public Empresa(String nome, String cnpj) {
 		super(nome, cnpj);
 	}
 

@@ -7,6 +7,7 @@ public  class  Strings {
 	public static final String btnCadastroVistorias = "Vistorias";
 	public static final String btnLogout = "Sair";
 	public static final String btnCadastrar = "Cadastrar";
+	public static final String btnSelecionar = "Selecionar";
 	
 	//Erros
 	public static final String aviso = "Aviso";
@@ -48,5 +49,5 @@ public  class  Strings {
 	public static final String mensagemCNPJ = "CNPJ válido";
 	public static final String mensagemSair = "Saindo do programa";
 	public static final String mensagemVoltarTelaPrincipal = "Voltando para a tela principal";
-	
+	public static final String tituloPesquisaEmpresa = "Empresas Cadastradas";
 }
