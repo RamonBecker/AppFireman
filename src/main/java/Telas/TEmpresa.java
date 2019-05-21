@@ -260,7 +260,6 @@ public class TEmpresa extends Application {
 		}
 
 		ControladorEmpresa.getInstance().cadastrarEmpresa(empresa);
-		;
 
 		txfRua.setText("");
 		txfNome.setText("");

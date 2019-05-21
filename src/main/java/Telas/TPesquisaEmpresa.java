@@ -1,9 +1,9 @@
 package Telas;
 
+import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
 import Entidades.Empresa;
 import Entidades.Strings;
-import Entidades.TBVEmpresa;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +29,7 @@ public class TPesquisaEmpresa extends Application {
 	private TextField txfCNPJ;
 	private Label lbNome;
 	private Label lbCnpj;
-	private Button btnSelecionar;
+	private Button btnEnviar;
 	private Menu menu;
 	private MenuItem menuItemVoltar;
 	private MenuBar menuBar;
@@ -100,19 +100,19 @@ public class TPesquisaEmpresa extends Application {
 
 		// CRIANDO BUTTON SELECIONAR
 
-		btnSelecionar = new Button(Strings.btnSelecionar);
-		btnSelecionar.setLayoutX(490);
-		btnSelecionar.setLayoutY(215);
-		btnSelecionar.setStyle(
+		btnEnviar = new Button(Strings.btnEnviar);
+		btnEnviar.setLayoutX(490);
+		btnEnviar.setLayoutY(215);
+		btnEnviar.setStyle(
 				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 100;-fx-text-fill: WHITE;");
 
-		
-		//System.out.println(tableView.getSelectionModel().getSelectedItem().getNome());
-		
-		//txfNome.setText(tableView.getSelectionModel().getSelectedItem().getNome());
-		
 		tableView.setOnMouseClicked(e -> setarDadosTextField(txfNome, txfCNPJ, tableView));
+		btnEnviar.setOnAction(e -> acaoBotaoSelecionar(stage, txfNome.getText(), txfNome.getText()));
+
 		
+		//DISABLE TEXT FIELDS
+		txfNome.setDisable(true);
+		txfCNPJ.setDisable(true);
 		
 		pane.getChildren().add(tableView);
 		pane.getChildren().add(lbTituloPesquisa);
@@ -121,7 +121,7 @@ public class TPesquisaEmpresa extends Application {
 		pane.getChildren().add(txfCNPJ);
 		pane.getChildren().add(lbNome);
 		pane.getChildren().add(lbCnpj);
-		pane.getChildren().add(btnSelecionar);
+		pane.getChildren().add(btnEnviar);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
@@ -129,8 +129,8 @@ public class TPesquisaEmpresa extends Application {
 	}
 
 	public ObservableList<Empresa> getEmpresa() {
-		ObservableList<Empresa> empresaList = FXCollections.observableArrayList();
 
+		ObservableList<Empresa> empresaList = FXCollections.observableArrayList();
 		ControladorEmpresa auxControladorEmpresa = ControladorEmpresa.getInstance();
 		int tamVetor = auxControladorEmpresa.getEmpresasCadastradas().size();
 		Empresa empresa = null;
@@ -143,7 +143,21 @@ public class TPesquisaEmpresa extends Application {
 
 		return empresaList;
 	}
+
 	private void setarDadosTextField(TextField nome, TextField cnpj, TableView<Empresa> tableView) {
-		System.out.println("OLA");
+		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemItemSelecionado);
+		nome.setText(tableView.getSelectionModel().getSelectedItem().getNome());
+		cnpj.setText(tableView.getSelectionModel().getSelectedItem().getCnpj());
+	}
+
+	private void acaoBotaoSelecionar(Stage stage, String nome, String cnpj) {
+
+		try {
+			new TVistoria(usuario, nome.trim(), cnpj.trim()).start(new Stage());
+			stage.close();
+		} catch (Exception e) {
+			MessageAlert.mensagemErro(Strings.erroTela);
+			e.printStackTrace();
+		}
 	}
 }

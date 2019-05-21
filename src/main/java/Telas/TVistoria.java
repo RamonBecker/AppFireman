@@ -3,6 +3,7 @@ package Telas;
 import com.jfoenix.controls.JFXButton;
 
 import Alert.MessageAlert;
+import Controladores.ControladorEmpresa;
 import Entidades.Strings;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 
 public class TVistoria extends Application {
 	private String usuario;
+	private String nome;
 	private String cnpj;
 	private Menu menu;
 	private MenuItem menuItemVoltar;
@@ -46,11 +48,12 @@ public class TVistoria extends Application {
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
 	}
-//
-//	public TVistoria(String usuario, String cnpj) {
-//		this.usuario = usuario;
-//		this.cnpj = cnpj;
-//	}
+
+	public TVistoria(String usuario, String nome, String cnpj) {
+		this.usuario = usuario;
+		this.cnpj = cnpj;
+		this.nome = nome;
+	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -90,27 +93,45 @@ public class TVistoria extends Application {
 		lbCnpj.setLayoutX(230);
 		lbCnpj.setLayoutY(100);
 
-		
-		
-		//CRIANDO BUTTON
+		// CRIANDO BUTTON
 		btnBuscarEmpresa = new JFXButton(Strings.btnBuscarEmpresa);
 		btnBuscarEmpresa.setLayoutX(250);
 		btnBuscarEmpresa.setLayoutY(40);
-		btnBuscarEmpresa.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 200;-fx-text-fill: WHITE;");
-		
-		//ACAO DO MENU ITEM
+		btnBuscarEmpresa.setStyle(
+				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 200;-fx-text-fill: WHITE;");
+
+		// ACAO DO MENU ITEM
 		acaoMenuItemVoltar(menuItemVoltar, stage);
 
-		//ACAO DA SCENE COM TECLA DE ATALHO
+		
+		//SETANDO DISABLE NOS TEXTFIELDS
+		txfNome.setDisable(true);
+		txfCnpj.setDisable(true);
+//		txfNumero.setDisable(true);
+//		txfBairro.setDisable(true);
+//		txfCep.setDisable(true);
+//		txfCidade.setDisable(true);
+//		txfRua.setDisable(true);
+		
+		
+		
+		//SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
+		if(!(this.cnpj == null && this.nome == null)) {
+			txfNome.setText(nome);
+			txfCnpj.setText(cnpj);
+			buscarDadosEmpresa(nome);
+		}
+		// ACAO DA SCENE COM TECLA DE ATALHO
 		scene.setOnKeyPressed((KeyEvent t) -> {
 			if (t.getCode() == KeyCode.ESCAPE) {
 				voltar(stage);
 			}
 		});
-	
-		//ACAO DO BUTTON DE PESQUISAR EMPRESA
+
+
+		// ACAO DO BUTTON DE PESQUISAR EMPRESA
 		acaoBotaoBuscar(btnBuscarEmpresa, stage);
-		
+
 		pane.getChildren().add(vBox);
 		pane.getChildren().add(txfNome);
 		pane.getChildren().add(txfCnpj);
@@ -123,7 +144,9 @@ public class TVistoria extends Application {
 
 	private void voltar(Stage stage) {
 		try {
+
 			new TPrincipal(usuario).start(new Stage());
+
 			stage.close();
 			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
 		} catch (Exception e) {
@@ -135,26 +158,42 @@ public class TVistoria extends Application {
 	private void acaoMenuItemVoltar(MenuItem menuItemVoltar, Stage stage) {
 		menuItemVoltar.setOnAction(e -> voltar(stage));
 	}
-	
+
 	private void acaoBotaoBuscar(JFXButton btnBuscarEmpresa, Stage stage) {
 		btnBuscarEmpresa.setDefaultButton(false);
-		btnBuscarEmpresa.setOnKeyPressed((KeyEvent t) ->{
-			if(t.getCode() == KeyCode.ENTER) {
+		btnBuscarEmpresa.setOnKeyPressed((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ENTER) {
 				telaPesquisaEmpresa(stage);
 			}
 		});
-		
+
 		btnBuscarEmpresa.setOnAction(e -> telaPesquisaEmpresa(stage));
 	}
 
 	private void telaPesquisaEmpresa(Stage stage) {
-		try {
-			new TPesquisaEmpresa(usuario).start(new Stage());
-			stage.close();
-		} catch (Exception e) {
-			MessageAlert.mensagemErro(Strings.erroTela);
-			e.printStackTrace();
-		}
 
+		ControladorEmpresa controladorEmpresa = ControladorEmpresa.getInstance();
+
+		if (!(controladorEmpresa.getEmpresasCadastradas().size() == 0)) {
+
+			try {
+				new TPesquisaEmpresa(usuario).start(new Stage());
+				stage.close();
+			} catch (Exception e) {
+				MessageAlert.mensagemErro(Strings.erroTela);
+				e.printStackTrace();
+			}
+		}else {
+			MessageAlert.mensagemErro(Strings.erroTela);
+		}
+	}
+	
+	private void buscarDadosEmpresa(String nome) {
+		
+		ControladorEmpresa controladorEmpresa = ControladorEmpresa.getInstance();
+		if(controladorEmpresa.buscarEmpresa(nome)) {
+			System.out.println("Encontrou");
+			System.out.println(controladorEmpresa.getPosicao());
+		}
 	}
 }

@@ -9,6 +9,7 @@ public  class  Strings {
 	public static final String btnCadastrar = "Cadastrar";
 	public static final String btnSelecionar = "Selecionar";
 	public static final String btnBuscarEmpresa = "Buscar Empresa";
+	public static final String btnEnviar = "Enviar";
 	
 	//Erros
 	public static final String aviso = "Aviso";
@@ -53,4 +54,5 @@ public  class  Strings {
 	public static final String mensagemSair = "Saindo do programa";
 	public static final String mensagemVoltarTelaPrincipal = "Voltando para a tela principal";
 	public static final String tituloPesquisaEmpresa = "Empresas Cadastradas";
+	public static final String mensagemItemSelecionado = "Item selecionado";
 }
