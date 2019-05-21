@@ -24,7 +24,7 @@ public class TPrincipal extends Application {
 	private JFXButton btnCadastroVistoria;
 	private Label labelCadastroEmpresa;
 	private Label labelCadastroVistoria;
-
+	private TPrincipal tPrincipal;
 	public TPrincipal(String usuario) {
 		this.usuario = usuario;
 	}
@@ -98,8 +98,12 @@ public class TPrincipal extends Application {
 		// AÇÃO DO MENU SAIR
 		m1.setOnAction(e -> sair(stage));
 
-		// BOTAO EMPRESA
+		
+		//AÇAÕ BOTAO VISTORIA
+		acaoBotaoVistoria(btnCadastroVistoria, stage);
 
+	
+		
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -116,21 +120,48 @@ public class TPrincipal extends Application {
 		btnCadastroEmpresa.setOnAction(e -> telaEmpresa(stage));
 
 	}
+	
+	
+	public void acaoBotaoVistoria(JFXButton btnCadastroVistoria, Stage stage) {
+
+		btnCadastroVistoria.setDefaultButton(false);
+		btnCadastroVistoria.setOnKeyPressed((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ENTER) {
+				telaVistoria(stage);
+			}
+		});
+		btnCadastroVistoria.setOnAction(e -> telaVistoria(stage));
+
+	}
 
 	private void telaEmpresa(Stage stage) {
 		try {
 			new TEmpresa(usuario).start(new Stage());
+			stage.close();
 		} catch (Exception e) {
 			MessageAlert.mensagemErro(Strings.erroTela);
 			;
 			e.printStackTrace();
 		}
-		;
+	}
+	
+	private void telaVistoria(Stage stage) {
+		
+		try {
+			
+			new TVistoria(usuario).start(new Stage());
+			stage.close();
+		} catch (Exception e) {
+			MessageAlert.mensagemErro(Strings.erroTela);
+			e.printStackTrace();
+		};
 	}
 
 	public void sair(Stage stage) {
 		stage.close();
 		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemSair);
 	}
+	
+
 
 }

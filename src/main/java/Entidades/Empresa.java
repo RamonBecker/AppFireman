@@ -27,4 +27,11 @@ public class Empresa extends PessoaJuridica{
 		}
 		this.telefone = telefone;
 	}
+
+	@Override
+	public String toString() {
+		return "Empresa [telefone=" + telefone + "]";
+	}
+	
+	
 }

@@ -1,5 +1,7 @@
 package Telas;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.JFXButton;
 
 import Alert.MessageAlert;
@@ -19,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -46,11 +49,11 @@ public class TEmpresa extends Application {
 	private Label lbNumero;
 	private Label lbEmpresa;
 	private JFXButton btnCadastrar;
-
+	
 	public TEmpresa(String usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		AnchorPane pane = new AnchorPane();
@@ -204,13 +207,12 @@ public class TEmpresa extends Application {
 		//AÇÃO DO BOTÃO MENU ITEM VOLTAR
 		
 		menuItem1.setOnAction(e -> voltar(stage));
+		
 		scene.setOnKeyPressed((KeyEvent t) ->{
 		    if(t.getCode() == KeyCode.ESCAPE) {
 		    	voltar(stage);
 		    }
 		});
-		
-		
 		
 		// ADICIONANDO COMPONENTE NA TELA
 		pane.getChildren().add(txfNome);
@@ -259,9 +261,9 @@ public class TEmpresa extends Application {
 
 		Empresa empresa = new Empresa(txfNome.getText(), endereco, documento, txfNomefantasia.getText(),
 				txfTelefone.getText());
-		ControladorEmpresa controladorEmpresa = new ControladorEmpresa();
-		controladorEmpresa.cadastrarEmpresa(empresa);
-
+		
+		ControladorEmpresa.getInstance().cadastrarEmpresa(empresa);;
+	
 		txfRua.setText("");
 		txfNome.setText("");
 		txfBairro.setText("");
@@ -271,11 +273,17 @@ public class TEmpresa extends Application {
 		txfTelefone.setText("");
 		txfNumero.setText("");
 		txfEstado.setText("");
+		txfCep.setText("");
 	}
 
 	private void voltar(Stage stage) {
-		stage.close();
-		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
-		new TPrincipal(usuario);
+		try {
+			new TPrincipal(usuario).start(new Stage());
+			stage.close();
+			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 	}
 }
