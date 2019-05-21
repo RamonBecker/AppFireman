@@ -24,7 +24,12 @@ public class TPrincipal extends Application {
 	private JFXButton btnCadastroVistoria;
 	private Label labelCadastroEmpresa;
 	private Label labelCadastroVistoria;
-	private TPrincipal tPrincipal;
+	private Menu menu;
+	private MenuItem menuItemSair;
+	private MenuBar menuBar;
+	private VBox vBox;
+	
+	
 	public TPrincipal(String usuario) {
 		this.usuario = usuario;
 	}
@@ -72,15 +77,15 @@ public class TPrincipal extends Application {
 		labelCadastroVistoria.setLayoutY(235);
 
 		// ADICIONANDO MENU
-		Menu m = new Menu("Menu");
-		MenuItem m1 = new MenuItem("Sair");
+		 menu = new Menu("Menu");
+		 menuItemSair = new MenuItem("Sair");
 
-		m.getItems().add(m1);
-		MenuBar mb = new MenuBar();
+		menu.getItems().add(menuItemSair);
+		 menuBar = new MenuBar();
 
-		mb.getMenus().add(m);
-		VBox vb = new VBox(1, mb);
-		vb.setPrefSize(500, 40);
+		menuBar.getMenus().add(menu);
+		vBox = new VBox(1, menuBar);
+		vBox.setPrefSize(500, 40);
 
 		// ADICIONANDO COMPONENTES NO PANE
 
@@ -88,7 +93,7 @@ public class TPrincipal extends Application {
 		pane.getChildren().add(btnCadastroVistoria);
 		pane.getChildren().add(labelCadastroEmpresa);
 		pane.getChildren().add(labelCadastroVistoria);
-		pane.getChildren().add(vb);
+		pane.getChildren().add(vBox);
 
 		// AÇÕES DOS BOTÕES
 
@@ -96,7 +101,7 @@ public class TPrincipal extends Application {
 		acaoBotaoEmpresa(btnCadastroEmpresa, stage);
 		
 		// AÇÃO DO MENU SAIR
-		m1.setOnAction(e -> sair(stage));
+		menuItemSair.setOnAction(e -> sair(stage));
 
 		
 		//AÇAÕ BOTAO VISTORIA
@@ -161,7 +166,4 @@ public class TPrincipal extends Application {
 		stage.close();
 		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemSair);
 	}
-	
-
-
 }

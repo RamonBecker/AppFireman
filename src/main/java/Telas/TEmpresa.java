@@ -1,6 +1,5 @@
 package Telas;
 
-
 import com.jfoenix.controls.JFXButton;
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
@@ -44,7 +43,11 @@ public class TEmpresa extends Application {
 	private Label lbNumero;
 	private Label lbEmpresa;
 	private JFXButton btnCadastrar;
-	
+	private Menu menu;
+	private MenuItem menuItemVoltar;
+	private MenuBar menuBar;
+	private VBox vBox;
+
 	public TEmpresa(String usuario) {
 		this.usuario = usuario;
 	}
@@ -175,15 +178,15 @@ public class TEmpresa extends Application {
 				+ "    -fx-pref-width: 100;\r\n" + "    -fx-text-fill: WHITE;");
 
 		// ADICIONANDO MENU
-		Menu menu = new Menu("Menu");
-		MenuItem menuItem1 = new MenuItem("Voltar");
+		menu = new Menu("Menu");
+		menuItemVoltar = new MenuItem("Voltar");
 
-		menu.getItems().add(menuItem1);
-		MenuBar menuBar = new MenuBar();
+		menu.getItems().add(menuItemVoltar);
+		menuBar = new MenuBar();
 
 		menuBar.getMenus().add(menu);
-		VBox vb = new VBox(1, menuBar);
-		vb.setPrefSize(700, 40);
+		vBox = new VBox(1, menuBar);
+		vBox.setPrefSize(700, 40);
 
 		// AÇÃO DOS BOTÕES
 		// AÇÃO DO BOTAO CADASTRAR
@@ -199,16 +202,16 @@ public class TEmpresa extends Application {
 		btnCadastrar.setOnAction(e -> cadastrarEmpresa(txfNome, txfCnpj, txfRua, txfBairro, txfCidade, txfEstado,
 				txfCep, txfNumero, txfNomefantasia, txfTelefone));
 
-		//AÇÃO DO BOTÃO MENU ITEM VOLTAR
-		
-		menuItem1.setOnAction(e -> voltar(stage));
-		
-		scene.setOnKeyPressed((KeyEvent t) ->{
-		    if(t.getCode() == KeyCode.ESCAPE) {
-		    	voltar(stage);
-		    }
+		// AÇÃO DO BOTÃO MENU ITEM VOLTAR
+
+		menuItemVoltar.setOnAction(e -> voltar(stage));
+
+		scene.setOnKeyPressed((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ESCAPE) {
+				voltar(stage);
+			}
 		});
-		
+
 		// ADICIONANDO COMPONENTE NA TELA
 		pane.getChildren().add(txfNome);
 		pane.getChildren().add(lbNome);
@@ -232,7 +235,7 @@ public class TEmpresa extends Application {
 		pane.getChildren().add(txfNumero);
 		pane.getChildren().add(lbNumero);
 		pane.getChildren().add(lbEmpresa);
-		pane.getChildren().add(vb);
+		pane.getChildren().add(vBox);
 
 		stage.setResizable(false);
 		stage.setScene(scene);
@@ -247,17 +250,18 @@ public class TEmpresa extends Application {
 				txfEstado.getText(), txfCep.getText(), txfNumero.getText());
 
 		Empresa empresa = null;
-		
+
 		try {
-			empresa = new Empresa(txfNome.getText(), endereco,txfNomefantasia.getText(), txfCnpj.getText(), 
+			empresa = new Empresa(txfNome.getText(), endereco, txfNomefantasia.getText(), txfCnpj.getText(),
 					txfTelefone.getText());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		ControladorEmpresa.getInstance().cadastrarEmpresa(empresa);;
-	
+
+		ControladorEmpresa.getInstance().cadastrarEmpresa(empresa);
+		;
+
 		txfRua.setText("");
 		txfNome.setText("");
 		txfBairro.setText("");
@@ -276,7 +280,7 @@ public class TEmpresa extends Application {
 			stage.close();
 			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 	}

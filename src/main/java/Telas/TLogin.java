@@ -17,7 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Login extends Application {
+public class TLogin extends Application {
 	private JFXButton btnLogin;
 	// private JavaFXImageBuilder
 	private JFXTextField txfUsuario;
