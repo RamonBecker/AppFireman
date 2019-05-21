@@ -106,6 +106,14 @@ public class TPesquisaEmpresa extends Application {
 		btnSelecionar.setStyle(
 				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 100;-fx-text-fill: WHITE;");
 
+		
+		//System.out.println(tableView.getSelectionModel().getSelectedItem().getNome());
+		
+		//txfNome.setText(tableView.getSelectionModel().getSelectedItem().getNome());
+		
+		tableView.setOnMouseClicked(e -> setarDadosTextField(txfNome, txfCNPJ, tableView));
+		
+		
 		pane.getChildren().add(tableView);
 		pane.getChildren().add(lbTituloPesquisa);
 		pane.getChildren().add(vBox);
@@ -134,5 +142,8 @@ public class TPesquisaEmpresa extends Application {
 		}
 
 		return empresaList;
+	}
+	private void setarDadosTextField(TextField nome, TextField cnpj, TableView<Empresa> tableView) {
+		System.out.println("OLA");
 	}
 }

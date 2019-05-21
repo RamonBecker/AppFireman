@@ -8,6 +8,7 @@ public  class  Strings {
 	public static final String btnLogout = "Sair";
 	public static final String btnCadastrar = "Cadastrar";
 	public static final String btnSelecionar = "Selecionar";
+	public static final String btnBuscarEmpresa = "Buscar Empresa";
 	
 	//Erros
 	public static final String aviso = "Aviso";
@@ -42,6 +43,8 @@ public  class  Strings {
 	public static final String lblSenha = "Senha";
 	public static final String lbNumero = "Número";
 	public static final String lbEmpresa = "Cadastrar Empresa";
+	public static final String lbAreaTotalEdificacao = "Área total da edificacao";
+	public static final String lbAreaVistoriada = "Área vistoriada";
 	
 	//Mensagens
 	public static final String mensagemEmpresa = "Empresa Cadastrada com sucesso";

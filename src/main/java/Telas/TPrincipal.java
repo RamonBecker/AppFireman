@@ -113,7 +113,7 @@ public class TPrincipal extends Application {
 		stage.show();
 	}
 
-	public void acaoBotaoEmpresa(JFXButton btnCadastroEmpresa, Stage stage) {
+	private void acaoBotaoEmpresa(JFXButton btnCadastroEmpresa, Stage stage) {
 
 		btnCadastroEmpresa.setDefaultButton(false);
 		btnCadastroEmpresa.setOnKeyPressed((KeyEvent t) -> {
@@ -127,7 +127,7 @@ public class TPrincipal extends Application {
 	}
 	
 	
-	public void acaoBotaoVistoria(JFXButton btnCadastroVistoria, Stage stage) {
+	private void acaoBotaoVistoria(JFXButton btnCadastroVistoria, Stage stage) {
 
 		btnCadastroVistoria.setDefaultButton(false);
 		btnCadastroVistoria.setOnKeyPressed((KeyEvent t) -> {
@@ -162,7 +162,7 @@ public class TPrincipal extends Application {
 		};
 	}
 
-	public void sair(Stage stage) {
+	private void sair(Stage stage) {
 		stage.close();
 		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemSair);
 	}
