@@ -57,4 +57,9 @@ public  class  Strings {
 	public static final String mensagemVoltarTelaPrincipal = "Voltando para a tela principal";
 	public static final String tituloPesquisaEmpresa = "Empresas Cadastradas";
 	public static final String mensagemItemSelecionado = "Item selecionado";
+	public static final String mensagemMotivoIndeferimento = "Descreva o motivo do indeferimento";
+	
+	//RADIO BUTTONS
+	public static final String rdIndeferido = "Indeferido";
+	public static final String rdDeferido = "Deferido";
 }

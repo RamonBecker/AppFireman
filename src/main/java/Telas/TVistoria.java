@@ -6,17 +6,22 @@ import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
 import Entidades.Strings;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -49,6 +54,10 @@ public class TVistoria extends Application {
 	private Label lbAreaVistoriada;
 	private Label lbMotivo;
 	private JFXButton btnBuscarEmpresa;
+	private RadioButton radioButtonDeferido;
+	private RadioButton radioButtonIndeferido;
+	private ToggleGroup radioGroup;
+	private HBox hbox;
 
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
@@ -178,13 +187,13 @@ public class TVistoria extends Application {
 		lbAreaVistoriada.setLayoutY(190);
 
 		// CRIANDO Label Motivos
-		lbMotivo = new Label(Strings.lbMotivo+":");
+		lbMotivo = new Label(Strings.lbMotivo + ":");
 		lbMotivo.setLayoutX(13);
 		lbMotivo.setLayoutY(220);
 
 		// CRIANDO TEXTAREA Motivos
 		txaMotivo = new TextArea();
-		txaMotivo.setPrefSize(260, 100 );
+		txaMotivo.setPrefSize(260, 100);
 		txaMotivo.setLayoutX(156);
 		txaMotivo.setLayoutY(220);
 
@@ -196,6 +205,40 @@ public class TVistoria extends Application {
 		txfCep.setDisable(true);
 		txfCidade.setDisable(true);
 		txfRua.setDisable(true);
+		txaMotivo.setDisable(true);
+
+		// CRIANDO GROUP DE RADIOBUTTONS
+		radioButtonDeferido = new RadioButton(Strings.rdDeferido);
+		radioButtonDeferido.setUserData(Strings.rdDeferido);
+
+		radioButtonIndeferido = new RadioButton(Strings.rdIndeferido);
+		radioButtonIndeferido.setUserData(Strings.rdIndeferido);
+
+		radioGroup = new ToggleGroup();
+
+		radioButtonDeferido.setToggleGroup(radioGroup);
+		radioButtonIndeferido.setToggleGroup(radioGroup);
+
+		hbox = new HBox();
+		hbox.setLayoutX(190);
+		hbox.setLayoutY(350);
+
+		hbox.getChildren().add(radioButtonDeferido);
+		hbox.getChildren().add(radioButtonIndeferido);
+
+		radioGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+					if (radioGroup.getSelectedToggle() != null) {
+						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdIndeferido)) {
+							MessageAlert.mensagemRealizadoSucesso(Strings.mensagemMotivoIndeferimento);
+							txaMotivo.setDisable(false);
+						}
+
+						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdDeferido)) {
+							txaMotivo.setDisable(true);
+						}
+
+					}
+				});
 
 		// SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
 		if (!(this.cnpj == null && this.nome == null)) {
@@ -238,6 +281,7 @@ public class TVistoria extends Application {
 		pane.getChildren().add(txfAreaVistoriadaEdificacao);
 		pane.getChildren().add(lbMotivo);
 		pane.getChildren().add(txaMotivo);
+		pane.getChildren().add(hbox);
 		stage.setScene(scene);
 		stage.show();
 	}
