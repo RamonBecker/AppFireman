@@ -20,6 +20,7 @@ public  class  Strings {
 	public static final String usuarioIncorreto = "Usuário Incorreto";
 	public static final String cpfInvalido = "CPF inválido";
 	public static final String cnpjInvalido = "CNPJ inválido";
+	public static final String empresaNaoEncontrada = "Empresa não encontrada";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
@@ -46,6 +47,7 @@ public  class  Strings {
 	public static final String lbEmpresa = "Cadastrar Empresa";
 	public static final String lbAreaTotalEdificacao = "Área total da edificacao";
 	public static final String lbAreaVistoriada = "Área vistoriada";
+	public static final String lbMotivo = "Motivo do Indeferimento";
 	
 	//Mensagens
 	public static final String mensagemEmpresa = "Empresa Cadastrada com sucesso";

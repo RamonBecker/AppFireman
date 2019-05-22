@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -36,6 +37,7 @@ public class TVistoria extends Application {
 	private TextField txfNumero;
 	private TextField txfAreaTotalEdificacao;
 	private TextField txfAreaVistoriadaEdificacao;
+	private TextArea txaMotivo;
 	private Label lbNome;
 	private Label lbCnpj;
 	private Label lbRua;
@@ -43,6 +45,9 @@ public class TVistoria extends Application {
 	private Label lbCidade;
 	private Label lbCep;
 	private Label lbNumero;
+	private Label lbAreaTotalEdificacao;
+	private Label lbAreaVistoriada;
+	private Label lbMotivo;
 	private JFXButton btnBuscarEmpresa;
 
 	public TVistoria(String usuario) {
@@ -100,23 +105,100 @@ public class TVistoria extends Application {
 		btnBuscarEmpresa.setStyle(
 				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 200;-fx-text-fill: WHITE;");
 
-		// ACAO DO MENU ITEM
-		acaoMenuItemVoltar(menuItemVoltar, stage);
+		// Criando Textfield Rua
 
-		
-		//SETANDO DISABLE NOS TEXTFIELDS
+		txfRua = new TextField();
+		txfRua.setLayoutX(520);
+		txfRua.setLayoutY(130);
+
+		// CRIANDO LABEL Rua
+		lbRua = new Label(Strings.lbRua + ": ");
+		lbRua.setLayoutX(480);
+		lbRua.setLayoutY(130);
+
+		// Criando Textfield Bairro
+		txfBairro = new TextField();
+		txfBairro.setLayoutX(520);
+		txfBairro.setLayoutY(100);
+
+		// CRIANDO LABEL Bairro
+		lbBairro = new Label(Strings.lbBairro + ":");
+		lbBairro.setLayoutX(480);
+		lbBairro.setLayoutY(100);
+
+		// Criando Textfield Cidade
+		txfCidade = new TextField();
+		txfCidade.setLayoutX(60);
+		txfCidade.setLayoutY(130);
+
+		// CRIANDO LABEL Cidade
+		lbCidade = new Label(Strings.lbCidade + ":");
+		lbCidade.setLayoutX(20);
+		lbCidade.setLayoutY(130);
+
+		// Criando Textfield CEP
+		txfCep = new TextField();
+		txfCep.setLayoutX(260);
+		txfCep.setLayoutY(130);
+
+		// CRIANDO LABEL CEP
+		lbCep = new Label(Strings.lbCep + ":");
+		lbCep.setLayoutX(230);
+		lbCep.setLayoutY(130);
+
+		// Criando Textfield Numero
+		txfNumero = new TextField();
+		txfNumero.setLayoutX(260); // 260
+		txfNumero.setLayoutY(160);
+
+		// CRIANDO LABEL Numero
+		lbNumero = new Label(Strings.lbNumero + ":");
+		lbNumero.setLayoutX(210);// 230
+		lbNumero.setLayoutY(160);
+
+		// CRIANDO Textfield AreaTotalEdificacao
+		txfAreaTotalEdificacao = new TextField();
+		txfAreaTotalEdificacao.setLayoutX(146);
+		txfAreaTotalEdificacao.setLayoutY(190);
+
+		// CRIANDO LABEL AreaTotalEdificacao
+		lbAreaTotalEdificacao = new Label(Strings.lbAreaTotalEdificacao + ":");
+		lbAreaTotalEdificacao.setLayoutX(13);
+		lbAreaTotalEdificacao.setLayoutY(190);
+
+		// CRIANDO Textfield AreaVistoriada
+
+		txfAreaVistoriadaEdificacao = new TextField();
+		txfAreaVistoriadaEdificacao.setLayoutX(450);
+		txfAreaVistoriadaEdificacao.setLayoutY(190);
+
+		// CRIANDO Label AreaVistoriada
+		lbAreaVistoriada = new Label(Strings.lbAreaVistoriada + ":");
+		lbAreaVistoriada.setLayoutX(366);
+		lbAreaVistoriada.setLayoutY(190);
+
+		// CRIANDO Label Motivos
+		lbMotivo = new Label(Strings.lbMotivo+":");
+		lbMotivo.setLayoutX(13);
+		lbMotivo.setLayoutY(220);
+
+		// CRIANDO TEXTAREA Motivos
+		txaMotivo = new TextArea();
+		txaMotivo.setPrefSize(260, 100 );
+		txaMotivo.setLayoutX(156);
+		txaMotivo.setLayoutY(220);
+
+		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);
 		txfCnpj.setDisable(true);
-//		txfNumero.setDisable(true);
-//		txfBairro.setDisable(true);
-//		txfCep.setDisable(true);
-//		txfCidade.setDisable(true);
-//		txfRua.setDisable(true);
-		
-		
-		
-		//SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
-		if(!(this.cnpj == null && this.nome == null)) {
+		txfNumero.setDisable(true);
+		txfBairro.setDisable(true);
+		txfCep.setDisable(true);
+		txfCidade.setDisable(true);
+		txfRua.setDisable(true);
+
+		// SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
+		if (!(this.cnpj == null && this.nome == null)) {
 			txfNome.setText(nome);
 			txfCnpj.setText(cnpj);
 			buscarDadosEmpresa(nome);
@@ -128,6 +210,8 @@ public class TVistoria extends Application {
 			}
 		});
 
+		// ACAO DO MENU ITEM
+		acaoMenuItemVoltar(menuItemVoltar, stage);
 
 		// ACAO DO BUTTON DE PESQUISAR EMPRESA
 		acaoBotaoBuscar(btnBuscarEmpresa, stage);
@@ -135,9 +219,25 @@ public class TVistoria extends Application {
 		pane.getChildren().add(vBox);
 		pane.getChildren().add(txfNome);
 		pane.getChildren().add(txfCnpj);
+		pane.getChildren().add(txfRua);
+		pane.getChildren().add(txfBairro);
+		pane.getChildren().add(lbBairro);
+		pane.getChildren().add(txfCidade);
+		pane.getChildren().add(lbCidade);
+		pane.getChildren().add(txfCep);
+		pane.getChildren().add(lbCep);
+		pane.getChildren().add(txfNumero);
+		pane.getChildren().add(lbNumero);
+		pane.getChildren().add(lbRua);
 		pane.getChildren().add(lbNome);
 		pane.getChildren().add(lbCnpj);
 		pane.getChildren().add(btnBuscarEmpresa);
+		pane.getChildren().add(txfAreaTotalEdificacao);
+		pane.getChildren().add(lbAreaTotalEdificacao);
+		pane.getChildren().add(lbAreaVistoriada);
+		pane.getChildren().add(txfAreaVistoriadaEdificacao);
+		pane.getChildren().add(lbMotivo);
+		pane.getChildren().add(txaMotivo);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -183,17 +283,25 @@ public class TVistoria extends Application {
 				MessageAlert.mensagemErro(Strings.erroTela);
 				e.printStackTrace();
 			}
-		}else {
+		} else {
 			MessageAlert.mensagemErro(Strings.erroTela);
 		}
 	}
-	
+
 	private void buscarDadosEmpresa(String nome) {
-		
+
 		ControladorEmpresa controladorEmpresa = ControladorEmpresa.getInstance();
-		if(controladorEmpresa.buscarEmpresa(nome)) {
-			System.out.println("Encontrou");
+
+		if (controladorEmpresa.buscarEmpresa(nome)) {
+			int posicao = controladorEmpresa.getPosicao();
 			System.out.println(controladorEmpresa.getPosicao());
+			txfBairro.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getBairro());
+			txfCidade.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getCidade());
+			txfNumero.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getNumero());
+			txfRua.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getRua());
+			txfCep.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getCep());
+		} else {
+			MessageAlert.mensagemErro(Strings.empresaNaoEncontrada);
 		}
 	}
 }
