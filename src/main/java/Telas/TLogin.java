@@ -69,13 +69,13 @@ public class TLogin extends Application {
 		txfUsuario.setLayoutX(150);
 		txfUsuario.setLayoutY(150);
 
-		txfUsuario.setStyle("-jfx-focus-color: red;" + "-fx-font: 16px Arial;");
+		txfUsuario.setStyle(Strings.txfTexfieldJFX);
 		// CRIANDO CAMPO DE TEXTO DE SENHA
 
 		txfSenha = new JFXPasswordField();
 		txfSenha.setLayoutX(150);
 		txfSenha.setLayoutY(210);
-		txfSenha.setStyle("-jfx-focus-color: red;" + "-fx-font: 16px Arial;");
+		txfSenha.setStyle(Strings.txfTexfieldJFX);
 
 		// ADICIONANDO IMAGEM
 		
@@ -90,9 +90,7 @@ public class TLogin extends Application {
 		btnLogin.setLayoutX(190);
 		btnLogin.setLayoutY(270);
 
-		btnLogin.setStyle("-fx-padding: 0.7em 0.57em;\r\n" + "-fx-font-size: 14px;\r\n"
-				+ "    -jfx-button-type: RAISED;\r\n" + "    -fx-background-color: rgb(155, 10, 7);\r\n"
-				+ "    -fx-pref-width: 100;\r\n" + "    -fx-text-fill: WHITE;");
+		btnLogin.setStyle(Strings.btnStyle);
 
 		btnLogin.setDefaultButton(true);
 		btnLogin.setOnKeyPressed((KeyEvent t) -> {
@@ -111,7 +109,7 @@ public class TLogin extends Application {
 		pane.getChildren().add(btnLogin);
 		pane.getChildren().add(txfUsuario);
 		pane.getChildren().add(imgView);
-		stage.setTitle("Login");
+		stage.setTitle(Strings.titleLogin);
 		stage.setResizable(true);
 		stage.setScene(scene);
 		stage.show();

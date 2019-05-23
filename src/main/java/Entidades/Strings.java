@@ -1,6 +1,10 @@
 package Entidades;
 
 public  class  Strings {
+	
+	//Title
+	public static final String titleLogin = "Login";
+	
 	//Botoes
 	public static final String btnLogin = "Entrar";
 	public static final String btnCadastroEmpresas = "Cadastrar Empresas";
@@ -79,4 +83,8 @@ public  class  Strings {
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";
 	public static final String rdDeferido = "Deferido";
+	
+	//Styles button
+	public static final String txfTexfieldJFX = "-jfx-focus-color: red;" + "-fx-font: 16px Arial;";
+	public static final String btnStyle = "-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;";
 }
