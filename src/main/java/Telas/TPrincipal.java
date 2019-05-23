@@ -39,7 +39,7 @@ public class TPrincipal extends Application {
 
 		AnchorPane pane = new AnchorPane();
 		Scene scene = new Scene(pane);
-		pane.setPrefSize(500, 400);
+		pane.setPrefSize(700, 500);
 
 		// CRIANDO BUTTON CADASTRO DE EMPRESAS
 		btnCadastroEmpresa = new JFXButton();
@@ -85,7 +85,7 @@ public class TPrincipal extends Application {
 
 		menuBar.getMenus().add(menu);
 		vBox = new VBox(1, menuBar);
-		vBox.setPrefSize(500, 40);
+		vBox.setPrefSize(700, 40);
 
 		// ADICIONANDO COMPONENTES NO PANE
 

@@ -10,6 +10,7 @@ public  class  Strings {
 	public static final String btnSelecionar = "Selecionar";
 	public static final String btnBuscarEmpresa = "Buscar Empresa";
 	public static final String btnEnviar = "Enviar";
+	public static final String btnCadastrarVistoria = "Cadastrar Vistoria";
 	
 	//Erros
 	public static final String aviso = "Aviso";
@@ -21,6 +22,7 @@ public  class  Strings {
 	public static final String cpfInvalido = "CPF inválido";
 	public static final String cnpjInvalido = "CNPJ inválido";
 	public static final String empresaNaoEncontrada = "Empresa não encontrada";
+	public static final String empresaNaoCadastrada = "Porque não existe nenhuma empresa cadastrada";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
@@ -58,6 +60,7 @@ public  class  Strings {
 	public static final String tituloPesquisaEmpresa = "Empresas Cadastradas";
 	public static final String mensagemItemSelecionado = "Item selecionado";
 	public static final String mensagemMotivoIndeferimento = "Descreva o motivo do indeferimento";
+	
 	
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";

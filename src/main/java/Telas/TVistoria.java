@@ -54,6 +54,7 @@ public class TVistoria extends Application {
 	private Label lbAreaVistoriada;
 	private Label lbMotivo;
 	private JFXButton btnBuscarEmpresa;
+	private JFXButton btnCadastrarVistoria;
 	private RadioButton radioButtonDeferido;
 	private RadioButton radioButtonIndeferido;
 	private ToggleGroup radioGroup;
@@ -109,10 +110,10 @@ public class TVistoria extends Application {
 
 		// CRIANDO BUTTON
 		btnBuscarEmpresa = new JFXButton(Strings.btnBuscarEmpresa);
-		btnBuscarEmpresa.setLayoutX(250);
-		btnBuscarEmpresa.setLayoutY(40);
+		btnBuscarEmpresa.setLayoutX(290);
+		btnBuscarEmpresa.setLayoutY(400);
 		btnBuscarEmpresa.setStyle(
-				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 200;-fx-text-fill: WHITE;");
+				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;");
 
 		// Criando Textfield Rua
 
@@ -197,6 +198,12 @@ public class TVistoria extends Application {
 		txaMotivo.setLayoutX(156);
 		txaMotivo.setLayoutY(220);
 
+		// CRIANDO BUTTON Cadastrar Vistoria
+		btnCadastrarVistoria = new JFXButton(Strings.btnCadastrarVistoria);
+		btnCadastrarVistoria.setLayoutX(100);
+		btnCadastrarVistoria.setLayoutY(400);
+		btnCadastrarVistoria.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;");
+		
 		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);
 		txfCnpj.setDisable(true);
@@ -282,6 +289,8 @@ public class TVistoria extends Application {
 		pane.getChildren().add(lbMotivo);
 		pane.getChildren().add(txaMotivo);
 		pane.getChildren().add(hbox);
+		pane.getChildren().add(btnCadastrarVistoria);
+		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -328,7 +337,7 @@ public class TVistoria extends Application {
 				e.printStackTrace();
 			}
 		} else {
-			MessageAlert.mensagemErro(Strings.erroTela);
+			MessageAlert.mensagemErro(Strings.erroTela+"\n"+Strings.empresaNaoCadastrada);
 		}
 	}
 
