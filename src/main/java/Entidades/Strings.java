@@ -41,6 +41,7 @@ public  class  Strings {
 	public static final String sobrenomeVazio = "O sobrenome não pode ser vazio";
 	public static final String dataNascimentoVazio = "A data de nascimento não pode ser vazio !";
 	public static final String nomeFantasiaVazio = "O nome fantasia não pode ser vazio";
+	public static final String selecioneEmpresa = "Selecione a empresa para voltar";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";

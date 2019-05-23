@@ -17,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -108,10 +110,21 @@ public class TPesquisaEmpresa extends Application {
 		tableView.setOnMouseClicked(e -> setarDadosTextField(txfNome, txfCNPJ, tableView));
 		btnEnviar.setOnAction(e -> acaoBotaoSelecionar(stage, txfNome.getText(), txfNome.getText()));
 
-		
-		//DISABLE TEXT FIELDS
+		// DISABLE TEXT FIELDS
 		txfNome.setDisable(true);
 		txfCNPJ.setDisable(true);
+
+		
+		acaoMenuItemVoltar(menuItemVoltar, stage, txfNome.getText(), txfCNPJ.getText());
+		
+		
+		// ACAO DA SCENE COM TECLA DE ATALHO
+		
+		scene.setOnKeyReleased((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ESCAPE) {
+				voltar(stage, txfNome.getText(), txfCNPJ.getText());
+			}
+		});
 		
 		pane.getChildren().add(tableView);
 		pane.getChildren().add(lbTituloPesquisa);
@@ -157,6 +170,30 @@ public class TPesquisaEmpresa extends Application {
 		} catch (Exception e) {
 			MessageAlert.mensagemErro(Strings.erroTela);
 			e.printStackTrace();
+		}
+	}
+
+	private void acaoMenuItemVoltar(MenuItem menuItemVoltar, Stage stage, String nome, String cnpj) {
+		menuItemVoltar.setOnAction(e -> voltar(stage, nome, cnpj));
+	}
+
+	private void voltar(Stage stage, String nome, String cnpj) {
+
+		if (!nome.isEmpty() && cnpj.isEmpty()) {
+
+			try {
+
+				new TVistoria(usuario, nome.trim(), cnpj.trim()).start(new Stage());
+
+				stage.close();
+				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVoltarTelaPrincipal);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+		}else {
+			MessageAlert.mensagemErro(Strings.selecioneEmpresa);
+			return;
 		}
 	}
 }
