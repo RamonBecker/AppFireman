@@ -1,12 +1,15 @@
 package Telas;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
+import Controladores.ControladorVistoria;
+import Entidades.Empresa;
 import Entidades.Strings;
+import Entidades.Vistoria;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -53,12 +56,14 @@ public class TVistoria extends Application {
 	private Label lbAreaTotalEdificacao;
 	private Label lbAreaVistoriada;
 	private Label lbMotivo;
+	private Label bmVistoriador;
 	private JFXButton btnBuscarEmpresa;
 	private JFXButton btnCadastrarVistoria;
 	private RadioButton radioButtonDeferido;
 	private RadioButton radioButtonIndeferido;
 	private ToggleGroup radioGroup;
 	private HBox hbox;
+	private Empresa empresa;
 
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
@@ -202,7 +207,7 @@ public class TVistoria extends Application {
 		btnCadastrarVistoria.setLayoutX(100);
 		btnCadastrarVistoria.setLayoutY(400);
 		btnCadastrarVistoria.setStyle(Strings.btnStyle);
-		
+
 		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);
 		txfCnpj.setDisable(true);
@@ -232,25 +237,24 @@ public class TVistoria extends Application {
 		hbox.getChildren().add(radioButtonDeferido);
 		hbox.getChildren().add(radioButtonIndeferido);
 
-		radioGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-					if (radioGroup.getSelectedToggle() != null) {
-						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdIndeferido)) {
-							MessageAlert.mensagemRealizadoSucesso(Strings.mensagemMotivoIndeferimento);
-							txaMotivo.setDisable(false);
-						}
+		// CRIANDO COMBO BOX
+		JFXComboBox<String> comboBox = new JFXComboBox<String>();
+		comboBox.setLayoutX(480);
+		comboBox.setLayoutY(250);
+		comboBox.setStyle(Strings.txfTexfieldJFXColor);
+		comboBox.setPromptText(Strings.mensagemSelecioneVistoriador);
+		comboBox.getItems().addAll(Strings.bmVistoriador);
 
-						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdDeferido)) {
-							txaMotivo.setDisable(true);
-						}
-
-					}
-				});
+		// CRIANDO LABEL BM VISTORIADOR
+		bmVistoriador = new Label();
+		bmVistoriador.setVisible(false);
 
 		// SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
 		if (!(this.cnpj == null && this.nome == null)) {
 			txfNome.setText(nome);
 			txfCnpj.setText(cnpj);
 			buscarDadosEmpresa(nome);
+			System.out.println(empresa);
 		}
 		// ACAO DA SCENE COM TECLA DE ATALHO
 		scene.setOnKeyPressed((KeyEvent t) -> {
@@ -264,6 +268,34 @@ public class TVistoria extends Application {
 
 		// ACAO DO BUTTON DE PESQUISAR EMPRESA
 		acaoBotaoBuscar(btnBuscarEmpresa, stage);
+
+		// AÇAO DO GROUP RADIO BUTTON
+		radioGroup.selectedToggleProperty()
+				.addListener((ObservableValue<? extends Toggle> ov, Toggle old_Valor, Toggle new_Valor) -> {
+					if (radioGroup.getSelectedToggle() != null) {
+						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdIndeferido)) {
+							MessageAlert.mensagemRealizadoSucesso(Strings.mensagemMotivoIndeferimento);
+							txaMotivo.setDisable(false);
+						}
+
+						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdDeferido)) {
+							txaMotivo.setDisable(true);
+						}
+
+					}
+				});
+
+		// AÇÃO DO COMBO BOX
+
+		comboBox.getSelectionModel().selectedItemProperty()
+				.addListener((ObservableValue<? extends String> observable, String oldValor, String newValor) -> {
+
+					bmVistoriador.setText(newValor);
+				});
+
+		// AÇÃO DO BUTTON CADASTRAR
+
+		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(bmVistoriador.getText().trim(), empresa));
 
 		pane.getChildren().add(vBox);
 		pane.getChildren().add(txfNome);
@@ -289,6 +321,7 @@ public class TVistoria extends Application {
 		pane.getChildren().add(txaMotivo);
 		pane.getChildren().add(hbox);
 		pane.getChildren().add(btnCadastrarVistoria);
+		pane.getChildren().add(comboBox);
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
@@ -336,8 +369,22 @@ public class TVistoria extends Application {
 				e.printStackTrace();
 			}
 		} else {
-			MessageAlert.mensagemErro(Strings.erroTela+"\n"+Strings.empresaNaoCadastrada);
+			MessageAlert.mensagemErro(Strings.erroTela + "\n" + Strings.empresaNaoCadastrada);
 		}
+	}
+
+	private void acaoButtonCadastrar(String vistoriador, Empresa empresa) {
+
+		if (empresa != null && vistoriador.isEmpty()) {
+
+			Vistoria vistoria = new Vistoria(empresa, vistoriador);
+			ControladorVistoria controladorV = ControladorVistoria.getInstance();
+			controladorV.cadastrarVistoria(vistoria);
+		}else {
+			MessageAlert.mensagemErro(Strings.erroCadastro+"\n"+Strings.empresaNaoCadastrada);
+			return;
+		}
+
 	}
 
 	private void buscarDadosEmpresa(String nome) {
@@ -346,7 +393,7 @@ public class TVistoria extends Application {
 
 		if (controladorEmpresa.buscarEmpresa(nome)) {
 			int posicao = controladorEmpresa.getPosicao();
-			System.out.println(controladorEmpresa.getPosicao());
+			empresa = controladorEmpresa.getEmpresasCadastradas().get(posicao);
 			txfBairro.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getBairro());
 			txfCidade.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getCidade());
 			txfNumero.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getNumero());

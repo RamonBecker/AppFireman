@@ -10,18 +10,28 @@ public class Vistoria implements Taxa {
 	private double areaTotalEdificacao;
 	private double areaVistoriada;
 
-	public Vistoria(Empresa empresa, String vistoriador) {
+	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada) {
 
 		if (empresa == null) {
-			throw new IllegalArgumentException("A empresa não pode ser vazio");
+			throw new IllegalArgumentException(Strings.empresaVazio);
 		}
 
 		if (vistoriador.isEmpty() || vistoriador == null) {
-			throw new IllegalArgumentException("O vistoriador não pode ser vazio");
+			throw new IllegalArgumentException(Strings.vistoriadorVazio);
+		}
+
+		if (areaTotalEdificacao < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaTotalEdificacao);
+		}
+
+		if (areaVistoriada < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaVistoria);
 		}
 
 		this.empresa = empresa;
 		this.vistoriador = vistoriador;
+		this.areaTotalEdificacao = areaTotalEdificacao;
+		this.areaVistoriada = areaVistoriada;
 	}
 
 	public Empresa getEmpresa() {
@@ -30,7 +40,7 @@ public class Vistoria implements Taxa {
 
 	public void setEmpresa(Empresa empresa) {
 		if (empresa == null) {
-			throw new IllegalArgumentException("A empresa não pode ser vazio");
+			throw new IllegalArgumentException(Strings.empresaVazio);
 		}
 		this.empresa = empresa;
 	}
@@ -42,7 +52,7 @@ public class Vistoria implements Taxa {
 	public void setVistoriador(String vistoriador) {
 
 		if (vistoriador.isEmpty() || vistoriador == null) {
-			throw new IllegalArgumentException("O vistoriador não pode ser vazio");
+			throw new IllegalArgumentException(Strings.vistoriadorVazio);
 		}
 		this.vistoriador = vistoriador;
 	}
@@ -58,19 +68,21 @@ public class Vistoria implements Taxa {
 		if (this.areaVistoriada > 100) {
 
 			this.taxaVistoria = (this.areaVistoriada * 0.40);
-		}else {
-			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaMinima+" "+Strings.de+" "+Strings.funcionamento);
+		} else {
+			MessageAlert.mensagemRealizadoSucesso(
+					Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.funcionamento);
 			this.taxaVistoria = 40;
 		}
 	}
 
 	@Override
 	public void taxaHabitese() {
-		if(this.areaTotalEdificacao > 100) {
+		if (this.areaTotalEdificacao > 100) {
 			this.areaTotalEdificacao = (this.areaTotalEdificacao * 0.69);
-		}else {
+		} else {
 			this.areaTotalEdificacao = 69;
-			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaMinima+" "+Strings.de+" "+Strings.habitese);
+			MessageAlert
+					.mensagemRealizadoSucesso(Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.habitese);
 		}
 	}
 
@@ -79,8 +91,8 @@ public class Vistoria implements Taxa {
 	}
 
 	public void setTaxaVistoria(double taxaVistoria) {
-		if(taxaVistoria <= 0) {
-			
+		if (taxaVistoria <= 0) {
+
 		}
 		this.taxaVistoria = taxaVistoria;
 	}
@@ -90,6 +102,11 @@ public class Vistoria implements Taxa {
 	}
 
 	public void setAreaTotalEdificacao(double areaTotalEdificacao) {
+
+		if (areaTotalEdificacao < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaTotalEdificacao);
+		}
+
 		this.areaTotalEdificacao = areaTotalEdificacao;
 	}
 
@@ -98,8 +115,9 @@ public class Vistoria implements Taxa {
 	}
 
 	public void setAreaVistoriada(double areaVistoriada) {
+		if (areaVistoriada < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaVistoria);
+		}
 		this.areaVistoriada = areaVistoriada;
 	}
-	
-	
 }

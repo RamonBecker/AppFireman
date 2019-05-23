@@ -32,4 +32,5 @@ public class ControladorVistoria {
 		return vistoria;
 	}
 
+	
 }

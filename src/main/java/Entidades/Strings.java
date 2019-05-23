@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.util.ArrayList;
+
 public  class  Strings {
 	
 	//Title
@@ -42,6 +44,12 @@ public  class  Strings {
 	public static final String dataNascimentoVazio = "A data de nascimento não pode ser vazio !";
 	public static final String nomeFantasiaVazio = "O nome fantasia não pode ser vazio";
 	public static final String selecioneEmpresa = "Selecione a empresa para voltar";
+	public static final String empresaVazio = "A empresa não pode ser vazio";
+	public static final String vistoriadorVazio = "O vistoriador não pode ser vazio";
+	public static final String telefoneVazio = "O numero do telefone não pode ser negativo";
+	public static final String erroCadastro = "Não foi possível cadastrar";
+	public static final String erroAreaTotalEdificacao = "A area total da edificao nao pode ser negativo";
+	public static final String erroAreaVistoria = "A area vistoriada nao pode ser negativo";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
@@ -83,7 +91,8 @@ public  class  Strings {
 	public static final String funcionamento = "Funcionamento";
 	public static final String habitese = "Habite-se";
 	public static final String de = "de";
-	public static final String mensagemVistoriaCadastrada = "Visotira cadastrada com sucesso";
+	public static final String mensagemVistoriaCadastrada = "Vistoria cadastrada com sucesso";
+	public static final String mensagemSelecioneVistoriador = "Selecione o vistoriador";
 	
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";
@@ -94,4 +103,13 @@ public  class  Strings {
 	public static final String txfTexfieldFonte = "-fx-font: 16px Arial;";
 	public static final String btnStyle = "-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;";
 	public static final String lbStyle = "-fx-font-size: 14px;";
+	
+	//COMBO BOX NOMES
+	public static final ArrayList<String> bmVistoriador = new ArrayList<String>() {
+		{
+			add("BM Willian");
+			add("BM Carlos");
+		}
+	};
+	
 }

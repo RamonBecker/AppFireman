@@ -1,8 +1,6 @@
 package Controladores;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import Alert.MessageAlert;
 import Entidades.Empresa;
 import Entidades.Strings;
@@ -50,4 +48,5 @@ public class ControladorEmpresa {
 	public int getPosicao() {
 		return posicao;
 	}
+
 }
