@@ -114,4 +114,7 @@ public  class  Strings {
 		}
 	};
 	
+	//DATE PICKER 
+	public static final String dataSelecionada = "Selecione a data da vistoria";
+	
 }

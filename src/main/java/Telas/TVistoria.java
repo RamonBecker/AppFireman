@@ -2,6 +2,8 @@ package Telas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
 import Controladores.ControladorVistoria;
@@ -65,6 +67,7 @@ public class TVistoria extends Application {
 	private Empresa empresa;
 	private String status;
 	private JFXComboBox<String> comboBox;
+	private JFXDatePicker datePicker;
 
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
@@ -209,6 +212,7 @@ public class TVistoria extends Application {
 		btnCadastrarVistoria.setLayoutY(400);
 		btnCadastrarVistoria.setStyle(Strings.btnStyle);
 
+		
 		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);
 		txfCnpj.setDisable(true);
@@ -250,6 +254,14 @@ public class TVistoria extends Application {
 		bmVistoriador = new Label();
 		bmVistoriador.setVisible(false);
 
+		// Criando Textfield Bairro
+		datePicker = new JFXDatePicker();
+		datePicker.setPrefWidth(200);
+		datePicker.setLayoutX(480);
+		datePicker.setLayoutY(280);
+		datePicker.setPromptText(Strings.dataSelecionada);
+		System.out.println(datePicker.getPromptText());
+		
 		// SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
 		if (!(this.cnpj == null && this.nome == null)) {
 			txfNome.setText(nome);
@@ -327,6 +339,7 @@ public class TVistoria extends Application {
 		pane.getChildren().add(hbox);
 		pane.getChildren().add(btnCadastrarVistoria);
 		pane.getChildren().add(comboBox);
+		pane.getChildren().add(datePicker);
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
