@@ -29,6 +29,8 @@ public  class  Strings {
 	public static final String estadoVazio = "O Estado não pode ser vazio !";
 	public static final String cepVazio = "O CEP não pode ser vazio !";
 	public static final String numeroVazio = "O numero não pode ser vazio !";
+	public static final String nomeVazio = "O nome não pode ser vazio";
+	public static final String enderecoVazio = "O endereço não pode ser vazio";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
