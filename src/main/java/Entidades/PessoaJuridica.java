@@ -16,7 +16,7 @@ public abstract class PessoaJuridica extends Pessoa {
 		super(nome, endereco);
 		
 		if (nomeFantasia.isEmpty() || nomeFantasia == null) {
-			throw new IllegalArgumentException("O nome fantasia não pode ser vazio");
+			throw new IllegalArgumentException(Strings.nomeFantasiaVazio);
 		}
 		
 		if(cnpj.trim().length() == 14) {
@@ -24,7 +24,7 @@ public abstract class PessoaJuridica extends Pessoa {
 				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
 				this.cnpj = cnpj;
 			}else {
-				throw new Exception("CNPJ Inválido");
+				throw new Exception(Strings.cnpjInvalido);
 			}
 		}
 		
@@ -36,7 +36,7 @@ public abstract class PessoaJuridica extends Pessoa {
 		super(nome);
 	
 		if (nomeFantasia.isEmpty() || nomeFantasia == null) {
-			throw new IllegalArgumentException("O nome fantasia não pode ser vazio");
+			throw new IllegalArgumentException(Strings.nomeFantasiaVazio);
 		}
 		
 		if(cnpj.trim().length() == 14) {
@@ -44,7 +44,7 @@ public abstract class PessoaJuridica extends Pessoa {
 				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
 				this.cnpj = cnpj;
 			}else {
-				throw new Exception("CNPJ Inválido");
+				throw new Exception(Strings.cnpjInvalido);
 			}
 		}
 		this.nomeFantasia = nomeFantasia;
@@ -55,7 +55,7 @@ public abstract class PessoaJuridica extends Pessoa {
 		super(nome, endereco);
 
 		if (nomeFantasia.isEmpty() || nomeFantasia == null) {
-			throw new IllegalArgumentException("O nome fantasia não pode ser vazio");
+			throw new IllegalArgumentException(Strings.nomeFantasiaVazio);
 		}
 		this.nomeFantasia = nomeFantasia;
 	}
@@ -66,7 +66,7 @@ public abstract class PessoaJuridica extends Pessoa {
 
 	public void setNomeFantasia(String nomeFantasia) {
 		if (nomeFantasia.isEmpty() || nomeFantasia == null) {
-			throw new IllegalArgumentException("O nome fantasia não pode ser vazio");
+			throw new IllegalArgumentException(Strings.nomeFantasiaVazio);
 		}
 		this.nomeFantasia = nomeFantasia;
 	}
@@ -82,7 +82,7 @@ public abstract class PessoaJuridica extends Pessoa {
 				MessageAlert.mensagemRealizadoSucesso(Strings.mensagemCNPJ);
 				this.cnpj = cnpj;
 			}else {
-				throw new Exception("CNPJ Inválido");
+				throw new Exception(Strings.cnpjInvalido);
 			}
 		}
 		this.cnpj = cnpj;
