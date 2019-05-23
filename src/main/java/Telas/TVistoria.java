@@ -1,5 +1,7 @@
 package Telas;
 
+import java.time.LocalDate;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -68,6 +70,7 @@ public class TVistoria extends Application {
 	private String status;
 	private JFXComboBox<String> comboBox;
 	private JFXDatePicker datePicker;
+	private String dataVistoria;
 
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
@@ -212,7 +215,6 @@ public class TVistoria extends Application {
 		btnCadastrarVistoria.setLayoutY(400);
 		btnCadastrarVistoria.setStyle(Strings.btnStyle);
 
-		
 		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);
 		txfCnpj.setDisable(true);
@@ -260,8 +262,7 @@ public class TVistoria extends Application {
 		datePicker.setLayoutX(480);
 		datePicker.setLayoutY(280);
 		datePicker.setPromptText(Strings.dataSelecionada);
-		System.out.println(datePicker.getPromptText());
-		
+
 		// SETANDO VALORES NOS TEXTFIELDS NOME E CNPJ
 		if (!(this.cnpj == null && this.nome == null)) {
 			txfNome.setText(nome);
@@ -312,7 +313,16 @@ public class TVistoria extends Application {
 		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(bmVistoriador.getText().trim(), empresa,
 				Double.parseDouble(txfAreaTotalEdificacao.getText()),
 
-				Double.parseDouble(txfAreaVistoriadaEdificacao.getText()), status, txaMotivo.getText(), stage));
+				Double.parseDouble(txfAreaVistoriadaEdificacao.getText()), status, txaMotivo.getText(), dataVistoria));
+
+		// AÇÃO DO DATEPICKER
+		datePicker.setOnAction(e -> {
+			LocalDate date = datePicker.getValue();
+			dataVistoria = String.valueOf(date);
+
+		});
+
+		System.out.println(ControladorVistoria.getInstance().getVistoria().toString());
 
 		pane.getChildren().add(vBox);
 		pane.getChildren().add(txfNome);
@@ -393,15 +403,16 @@ public class TVistoria extends Application {
 	}
 
 	private void acaoButtonCadastrar(String vistoriador, Empresa empresa, double areaTotal, double areaVistoriada,
-			String status, String motivoIndeferido, Stage stage) {
+			String status, String motivoIndeferido, String dataVistoria) {
 		ControladorVistoria controladorV = ControladorVistoria.getInstance();
 
 		if (status.equals(Strings.rdDeferido)) {
-			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status);
+			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, dataVistoria);
 			controladorV.cadastrarVistoria(vistoria);
 			limparCampos();
 		} else if (status.equals(Strings.rdIndeferido)) {
-			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, motivoIndeferido);
+			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, motivoIndeferido,
+					dataVistoria);
 			controladorV.cadastrarVistoria(vistoria);
 			limparCampos();
 		} else {
@@ -429,6 +440,7 @@ public class TVistoria extends Application {
 
 	private void limparCampos() {
 
+		getDatePicker().getEditor().setText(Strings.dataSelecionada);
 		getTxfNome().setText("");
 		getTxfCnpj().setText("");
 		getTxfAreaTotalEdificacao().setText("");
@@ -496,4 +508,7 @@ public class TVistoria extends Application {
 		return radioButtonIndeferido;
 	}
 
+	public JFXDatePicker getDatePicker() {
+		return datePicker;
+	}
 }

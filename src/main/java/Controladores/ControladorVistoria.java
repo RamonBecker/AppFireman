@@ -31,6 +31,4 @@ public class ControladorVistoria {
 	public ArrayList<Vistoria> getVistoria() {
 		return vistoria;
 	}
-
-	
 }

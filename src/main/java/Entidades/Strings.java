@@ -52,6 +52,7 @@ public  class  Strings {
 	public static final String erroAreaVistoria = "A area vistoriada nao pode ser negativo";
 	public static final String erroStatus = "O status não pode ser vazio";
 	public static final String erroMotivo = "O motivo não pode ser vazio;";
+	public static final String erroDataVazio = "A data não pode ser vazio";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";

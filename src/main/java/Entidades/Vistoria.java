@@ -6,14 +6,16 @@ public class Vistoria implements Taxa {
 
 	private Empresa empresa;
 	private String vistoriador;
-	private double taxaVistoria;
+	private double taxaHabitese;
+	private double taxaFuncionamento;
 	private double areaTotalEdificacao;
 	private double areaVistoriada;
 	private String status;
 	private String motivoIndeferido;
+	private String dataVistoria;
 
 	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
-			String status) {
+			String status, String dataVistoria) {
 
 		if (empresa == null) {
 			throw new IllegalArgumentException(Strings.empresaVazio);
@@ -34,17 +36,22 @@ public class Vistoria implements Taxa {
 		if (status == null || status.isEmpty()) {
 			throw new IllegalArgumentException(Strings.erroStatus);
 		}
-		
-		taxaHabitese();
+
+		if (dataVistoria.isEmpty() || dataVistoria == null) {
+			throw new IllegalArgumentException(Strings.erroDataVazio);
+		}
+
+		// taxaHabitese();
 		this.empresa = empresa;
 		this.vistoriador = vistoriador;
 		this.areaTotalEdificacao = areaTotalEdificacao;
 		this.areaVistoriada = areaVistoriada;
 		this.status = status;
+		this.dataVistoria = dataVistoria;
 	}
 
 	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
-			String status, String motivoIndeferido) {
+			String status, String motivoIndeferido, String dataVistoria) {
 
 		if (empresa == null) {
 			throw new IllegalArgumentException(Strings.empresaVazio);
@@ -69,7 +76,11 @@ public class Vistoria implements Taxa {
 		if (motivoIndeferido.isEmpty() || motivoIndeferido == null) {
 			throw new IllegalArgumentException(Strings.erroMotivo);
 		}
-		
+
+		if (dataVistoria.isEmpty() || dataVistoria == null) {
+			throw new IllegalArgumentException(Strings.erroDataVazio);
+		}
+
 		taxaHabitese();
 		this.empresa = empresa;
 		this.vistoriador = vistoriador;
@@ -77,6 +88,7 @@ public class Vistoria implements Taxa {
 		this.areaVistoriada = areaVistoriada;
 		this.status = status;
 		this.motivoIndeferido = motivoIndeferido;
+		this.dataVistoria = dataVistoria;
 	}
 
 	public Empresa getEmpresa() {
@@ -104,7 +116,6 @@ public class Vistoria implements Taxa {
 
 	@Override
 	public void pagarBoleto(double valor, String data) {
-
 	}
 
 	@Override
@@ -112,21 +123,21 @@ public class Vistoria implements Taxa {
 
 		if (this.areaVistoriada > 100) {
 
-			this.taxaVistoria = (this.areaVistoriada * 0.40);
+			this.taxaFuncionamento = (this.areaVistoriada * 0.40);
 		} else {
 			MessageAlert.mensagemRealizadoSucesso(
 					Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.funcionamento);
-			this.taxaVistoria = 40;
+			this.taxaFuncionamento = 40;
 		}
 	}
 
 	@Override
 	public void taxaHabitese() {
-		
+
 		taxaFuncionamento();
-		
+
 		if (this.areaTotalEdificacao > 100) {
-			this.areaTotalEdificacao = (this.areaTotalEdificacao * 0.69);
+			this.taxaHabitese = (this.areaTotalEdificacao * 0.69);
 		} else {
 			this.areaTotalEdificacao = 69;
 			MessageAlert
@@ -134,8 +145,12 @@ public class Vistoria implements Taxa {
 		}
 	}
 
-	public double getTaxaVistoria() {
-		return taxaVistoria;
+	public double getTaxaHabitese() {
+		return taxaHabitese;
+	}
+
+	public double getTaxaFuncionamento() {
+		return taxaFuncionamento;
 	}
 
 	public double getAreaTotalEdificacao() {
@@ -187,4 +202,25 @@ public class Vistoria implements Taxa {
 
 		this.motivoIndeferido = motivoIndeferido;
 	}
+
+	public String getDataVistoria() {
+		return dataVistoria;
+	}
+
+	public void setDataVistoria(String dataVistoria) {
+		if (dataVistoria.isEmpty() || dataVistoria == null) {
+			throw new IllegalArgumentException(Strings.erroDataVazio);
+		}
+		this.dataVistoria = dataVistoria;
+	}
+
+	@Override
+	public String toString() {
+		return "Vistoria [empresa=" + empresa + ", vistoriador=" + vistoriador + ", taxaHabitese=" + taxaHabitese
+				+ ", taxaFuncionamento=" + taxaFuncionamento + ", areaTotalEdificacao=" + areaTotalEdificacao
+				+ ", areaVistoriada=" + areaVistoriada + ", status=" + status + ", motivoIndeferido=" + motivoIndeferido
+				+ ", dataVistoria=" + dataVistoria + "]";
+	}
+	
+	
 }
