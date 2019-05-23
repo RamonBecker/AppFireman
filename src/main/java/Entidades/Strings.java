@@ -31,6 +31,8 @@ public  class  Strings {
 	public static final String numeroVazio = "O numero não pode ser vazio !";
 	public static final String nomeVazio = "O nome não pode ser vazio";
 	public static final String enderecoVazio = "O endereço não pode ser vazio";
+	public static final String sobrenomeVazio = "O sobrenome não pode ser vazio";
+	public static final String dataNascimentoVazio = "A data de nascimento não pode ser vazio !";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
