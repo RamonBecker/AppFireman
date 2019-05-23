@@ -10,7 +10,7 @@ import Entidades.Strings;
 public class ControladorEmpresa {
 	private int posicao;
 	private ArrayList<Empresa> empresasCadastradas;
-	private static ControladorEmpresa controladorEmpresa;
+	public static ControladorEmpresa controladorEmpresa;
 
 	public ControladorEmpresa() {
 		this.empresasCadastradas = new ArrayList<Empresa>();

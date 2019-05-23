@@ -83,6 +83,7 @@ public  class  Strings {
 	public static final String funcionamento = "Funcionamento";
 	public static final String habitese = "Habite-se";
 	public static final String de = "de";
+	public static final String mensagemVistoriaCadastrada = "Visotira cadastrada com sucesso";
 	
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";
