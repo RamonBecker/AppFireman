@@ -23,6 +23,12 @@ public  class  Strings {
 	public static final String cnpjInvalido = "CNPJ inválido";
 	public static final String empresaNaoEncontrada = "Empresa não encontrada";
 	public static final String empresaNaoCadastrada = "Porque não existe nenhuma empresa cadastrada";
+	public static final String ruaVazio = "A rua não pode ser vazio !";
+	public static final String bairroVazio = "O bairro não pode ser vazio !";
+	public static final String cidadeVazio = "A cidade não pode ser vazio !";
+	public static final String estadoVazio = "O Estado não pode ser vazio !";
+	public static final String cepVazio = "O CEP não pode ser vazio !";
+	public static final String numeroVazio = "O numero não pode ser vazio !";
 	
 	//Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
@@ -60,7 +66,10 @@ public  class  Strings {
 	public static final String tituloPesquisaEmpresa = "Empresas Cadastradas";
 	public static final String mensagemItemSelecionado = "Item selecionado";
 	public static final String mensagemMotivoIndeferimento = "Descreva o motivo do indeferimento";
-	
+	public static final String mensagemTaxaMinima = "Taxa mínima";
+	public static final String funcionamento = "Funcionamento";
+	public static final String habitese = "Habite-se";
+	public static final String de = "de";
 	
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";

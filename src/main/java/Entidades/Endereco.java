@@ -8,27 +8,27 @@ public class Endereco {
 	public Endereco(String rua, String bairro, String cidade, String estado, String cep, String numero) {
 
 		if (rua.isEmpty() || rua == null) {
-			throw new IllegalArgumentException("A rua não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.ruaVazio);
 		}
 
 		if (bairro.isEmpty() || bairro == null) {
-			throw new IllegalArgumentException("O bairro não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.bairroVazio);
 		}
 
 		if (cidade.isEmpty() || cidade == null) {
-			throw new IllegalArgumentException("A cidade não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.cidadeVazio);
 		}
 
 		if (estado.isEmpty() || estado == null) {
-			throw new IllegalArgumentException("O Estado não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.estadoVazio);
 		}
 
 		if (cep.isEmpty() || cep == null) {
-			throw new IllegalArgumentException("O CEP não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.cepVazio);
 		}
 
 		if (numero.isEmpty() || numero == null) {
-			throw new IllegalArgumentException("O numero não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.numeroVazio);
 		}
 
 		this.rua = rua;
@@ -46,7 +46,7 @@ public class Endereco {
 	public void setRua(String rua) {
 
 		if (rua.isEmpty() || rua == null) {
-			throw new IllegalArgumentException("A rua não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.ruaVazio);
 		}
 		this.rua = rua;
 	}
@@ -57,7 +57,7 @@ public class Endereco {
 
 	public void setBairro(String bairro) {
 		if (bairro.isEmpty() || bairro == null) {
-			throw new IllegalArgumentException("O bairro não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.bairroVazio);
 		}
 		this.bairro = bairro;
 	}
@@ -68,7 +68,7 @@ public class Endereco {
 
 	public void setCidade(String cidade) {
 		if (cidade.isEmpty() || cidade == null) {
-			throw new IllegalArgumentException("A cidade não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.cidadeVazio);
 		}
 		this.cidade = cidade;
 	}
@@ -79,7 +79,7 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		if (estado.isEmpty() || estado == null) {
-			throw new IllegalArgumentException("O Estado não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.estadoVazio);
 		}
 		this.estado = estado;
 	}
@@ -90,7 +90,7 @@ public class Endereco {
 
 	public void setCep(String cep) {
 		if (cep.isEmpty() || cep == null) {
-			throw new IllegalArgumentException("O CEP não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.cepVazio);
 		}
 		this.cep = cep;
 
@@ -103,7 +103,7 @@ public class Endereco {
 	public void setNumero(String numero) {
 
 		if (numero.isEmpty() || numero == null) {
-			throw new IllegalArgumentException("O numero não pode ser vazio !");
+			throw new IllegalArgumentException(Strings.numeroVazio);
 		}
 		this.numero = numero;
 	}

@@ -1,7 +1,7 @@
 package Entidades;
 
-public interface Taxa {
+public interface Taxa extends Pagamento {
 	
-	void taxaFuncionamento(double valor);
-	void taxaHabitese(double valor);
+	void taxaFuncionamento();
+	void taxaHabitese();
 }
