@@ -4,6 +4,9 @@ public  class  Strings {
 	
 	//Title
 	public static final String titleLogin = "Login";
+	public static final String titleMenu = "Menu";
+	public static final String titleVoltar = "Voltar";
+	public static final String titleSair = "Sair";
 	
 	//Botoes
 	public static final String btnLogin = "Entrar";
@@ -85,6 +88,8 @@ public  class  Strings {
 	public static final String rdDeferido = "Deferido";
 	
 	//Styles button
-	public static final String txfTexfieldJFX = "-jfx-focus-color: red;" + "-fx-font: 16px Arial;";
+	public static final String txfTexfieldJFXColor = "-jfx-focus-color: red;";
+	public static final String txfTexfieldFonte = "-fx-font: 16px Arial;";
 	public static final String btnStyle = "-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;";
+	public static final String lbStyle = "-fx-font-size: 14px;";
 }

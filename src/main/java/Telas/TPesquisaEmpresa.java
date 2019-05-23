@@ -46,14 +46,14 @@ public class TPesquisaEmpresa extends Application {
 		pane.setPrefSize(700, 500);
 
 		// Nome da coluna empresa
-		TableColumn<Empresa, String> nomeColumnEmpresa = new TableColumn<>("Nome");
+		TableColumn<Empresa, String> nomeColumnEmpresa = new TableColumn<>(Strings.lbNome);
 		nomeColumnEmpresa.setMinWidth(200);
-		nomeColumnEmpresa.setCellValueFactory(new PropertyValueFactory<Empresa, String>("nome"));
+		nomeColumnEmpresa.setCellValueFactory(new PropertyValueFactory<Empresa, String>(Strings.lbNome.toLowerCase()));
 
 		// Nome da coluna CNPJ
-		TableColumn<Empresa, String> nomeColumnCNPJ = new TableColumn<>("CNPJ");
+		TableColumn<Empresa, String> nomeColumnCNPJ = new TableColumn<>(Strings.lbCnpj);
 		nomeColumnCNPJ.setMinWidth(200);
-		nomeColumnCNPJ.setCellValueFactory(new PropertyValueFactory<Empresa, String>("cnpj"));
+		nomeColumnCNPJ.setCellValueFactory(new PropertyValueFactory<Empresa, String>(Strings.lbCnpj.toLowerCase()));
 
 		tableView = new TableView<Empresa>();
 		tableView.setItems(getEmpresa());
@@ -65,11 +65,11 @@ public class TPesquisaEmpresa extends Application {
 		lbTituloPesquisa = new Label(Strings.tituloPesquisaEmpresa);
 		lbTituloPesquisa.setLayoutX(250);
 		lbTituloPesquisa.setLayoutY(35);
-		lbTituloPesquisa.setStyle("-fx-font: 16px Arial;");
+		lbTituloPesquisa.setStyle(Strings.txfTexfieldFonte);
 
 		// ADICIONANDO MENU
-		menu = new Menu("Menu");
-		menuItemVoltar = new MenuItem("Voltar");
+		menu = new Menu(Strings.titleMenu);
+		menuItemVoltar = new MenuItem(Strings.titleVoltar);
 
 		menu.getItems().add(menuItemVoltar);
 		menuBar = new MenuBar();
@@ -103,8 +103,7 @@ public class TPesquisaEmpresa extends Application {
 		btnEnviar = new Button(Strings.btnEnviar);
 		btnEnviar.setLayoutX(490);
 		btnEnviar.setLayoutY(215);
-		btnEnviar.setStyle(
-				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 100;-fx-text-fill: WHITE;");
+		btnEnviar.setStyle(Strings.btnStyle);
 
 		tableView.setOnMouseClicked(e -> setarDadosTextField(txfNome, txfCNPJ, tableView));
 		btnEnviar.setOnAction(e -> acaoBotaoSelecionar(stage, txfNome.getText(), txfNome.getText()));

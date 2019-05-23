@@ -77,8 +77,8 @@ public class TVistoria extends Application {
 		pane.setPrefSize(700, 500);
 
 		// ADICIONANDO MENU
-		menu = new Menu("Menu");
-		menuItemVoltar = new MenuItem("Voltar");
+		menu = new Menu(Strings.titleMenu);
+		menuItemVoltar = new MenuItem(Strings.titleVoltar);
 
 		menu.getItems().add(menuItemVoltar);
 		menuBar = new MenuBar();
@@ -112,8 +112,7 @@ public class TVistoria extends Application {
 		btnBuscarEmpresa = new JFXButton(Strings.btnBuscarEmpresa);
 		btnBuscarEmpresa.setLayoutX(290);
 		btnBuscarEmpresa.setLayoutY(400);
-		btnBuscarEmpresa.setStyle(
-				"-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;");
+		btnBuscarEmpresa.setStyle(Strings.btnStyle);
 
 		// Criando Textfield Rua
 
@@ -202,7 +201,7 @@ public class TVistoria extends Application {
 		btnCadastrarVistoria = new JFXButton(Strings.btnCadastrarVistoria);
 		btnCadastrarVistoria.setLayoutX(100);
 		btnCadastrarVistoria.setLayoutY(400);
-		btnCadastrarVistoria.setStyle("-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;");
+		btnCadastrarVistoria.setStyle(Strings.btnStyle);
 		
 		// SETANDO DISABLE NOS TEXTFIELDS
 		txfNome.setDisable(true);

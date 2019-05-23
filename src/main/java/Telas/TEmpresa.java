@@ -60,7 +60,7 @@ public class TEmpresa extends Application {
 
 		// CRIANDO LABEL Empresa
 		lbEmpresa = new Label(Strings.lbEmpresa);
-		lbEmpresa.setStyle("-fx-font-size: 14px;");
+		lbEmpresa.setStyle(Strings.lbStyle);
 		lbEmpresa.setLayoutX(250);
 		lbEmpresa.setLayoutY(33);
 
@@ -173,13 +173,11 @@ public class TEmpresa extends Application {
 		btnCadastrar.setLayoutX(260);
 		btnCadastrar.setLayoutY(220);
 
-		btnCadastrar.setStyle("-fx-padding: 0.7em 0.57em;\r\n" + "    -fx-font-size: 14px;\r\n"
-				+ "    -jfx-button-type: RAISED;\r\n" + "    -fx-background-color: rgb(155, 10, 7);\r\n"
-				+ "    -fx-pref-width: 100;\r\n" + "    -fx-text-fill: WHITE;");
+		btnCadastrar.setStyle(Strings.btnStyle);
 
 		// ADICIONANDO MENU
-		menu = new Menu("Menu");
-		menuItemVoltar = new MenuItem("Voltar");
+		menu = new Menu(Strings.titleMenu);
+		menuItemVoltar = new MenuItem(Strings.titleVoltar);
 
 		menu.getItems().add(menuItemVoltar);
 		menuBar = new MenuBar();

@@ -69,13 +69,13 @@ public class TLogin extends Application {
 		txfUsuario.setLayoutX(150);
 		txfUsuario.setLayoutY(150);
 
-		txfUsuario.setStyle(Strings.txfTexfieldJFX);
+		txfUsuario.setStyle(Strings.txfTexfieldJFXColor+Strings.txfTexfieldFonte);
 		// CRIANDO CAMPO DE TEXTO DE SENHA
 
 		txfSenha = new JFXPasswordField();
 		txfSenha.setLayoutX(150);
 		txfSenha.setLayoutY(210);
-		txfSenha.setStyle(Strings.txfTexfieldJFX);
+		txfSenha.setStyle(Strings.txfTexfieldJFXColor+Strings.txfTexfieldFonte);
 
 		// ADICIONANDO IMAGEM
 		
@@ -87,7 +87,7 @@ public class TLogin extends Application {
 
 		// CRIANDO BUTTON ENTRAR
 		btnLogin = new JFXButton(Strings.btnLogin);
-		btnLogin.setLayoutX(190);
+		btnLogin.setLayoutX(170);
 		btnLogin.setLayoutY(270);
 
 		btnLogin.setStyle(Strings.btnStyle);

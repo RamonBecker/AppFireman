@@ -77,8 +77,8 @@ public class TPrincipal extends Application {
 		labelCadastroVistoria.setLayoutY(235);
 
 		// ADICIONANDO MENU
-		 menu = new Menu("Menu");
-		 menuItemSair = new MenuItem("Sair");
+		 menu = new Menu(Strings.titleMenu);
+		 menuItemSair = new MenuItem(Strings.titleSair);
 
 		menu.getItems().add(menuItemSair);
 		 menuBar = new MenuBar();
