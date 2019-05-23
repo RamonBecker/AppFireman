@@ -2,7 +2,6 @@ package Telas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
 import Controladores.ControladorVistoria;
@@ -64,6 +63,8 @@ public class TVistoria extends Application {
 	private ToggleGroup radioGroup;
 	private HBox hbox;
 	private Empresa empresa;
+	private String status;
+	private JFXComboBox<String> comboBox;
 
 	public TVistoria(String usuario) {
 		this.usuario = usuario;
@@ -238,7 +239,7 @@ public class TVistoria extends Application {
 		hbox.getChildren().add(radioButtonIndeferido);
 
 		// CRIANDO COMBO BOX
-		JFXComboBox<String> comboBox = new JFXComboBox<String>();
+		comboBox = new JFXComboBox<String>();
 		comboBox.setLayoutX(480);
 		comboBox.setLayoutY(250);
 		comboBox.setStyle(Strings.txfTexfieldJFXColor);
@@ -254,7 +255,6 @@ public class TVistoria extends Application {
 			txfNome.setText(nome);
 			txfCnpj.setText(cnpj);
 			buscarDadosEmpresa(nome);
-			System.out.println(empresa);
 		}
 		// ACAO DA SCENE COM TECLA DE ATALHO
 		scene.setOnKeyPressed((KeyEvent t) -> {
@@ -275,10 +275,12 @@ public class TVistoria extends Application {
 					if (radioGroup.getSelectedToggle() != null) {
 						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdIndeferido)) {
 							MessageAlert.mensagemRealizadoSucesso(Strings.mensagemMotivoIndeferimento);
+							status = (String) radioGroup.getSelectedToggle().getUserData();
 							txaMotivo.setDisable(false);
 						}
 
 						if (radioGroup.getSelectedToggle().getUserData().equals(Strings.rdDeferido)) {
+							status = (String) radioGroup.getSelectedToggle().getUserData();
 							txaMotivo.setDisable(true);
 						}
 
@@ -295,7 +297,10 @@ public class TVistoria extends Application {
 
 		// AÇÃO DO BUTTON CADASTRAR
 
-		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(bmVistoriador.getText().trim(), empresa));
+		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(bmVistoriador.getText().trim(), empresa,
+				Double.parseDouble(txfAreaTotalEdificacao.getText()),
+
+				Double.parseDouble(txfAreaVistoriadaEdificacao.getText()), status, txaMotivo.getText(), stage));
 
 		pane.getChildren().add(vBox);
 		pane.getChildren().add(txfNome);
@@ -325,6 +330,7 @@ public class TVistoria extends Application {
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
+
 	}
 
 	private void voltar(Stage stage) {
@@ -373,18 +379,22 @@ public class TVistoria extends Application {
 		}
 	}
 
-	private void acaoButtonCadastrar(String vistoriador, Empresa empresa) {
+	private void acaoButtonCadastrar(String vistoriador, Empresa empresa, double areaTotal, double areaVistoriada,
+			String status, String motivoIndeferido, Stage stage) {
+		ControladorVistoria controladorV = ControladorVistoria.getInstance();
 
-		if (empresa != null && vistoriador.isEmpty()) {
-
-			Vistoria vistoria = new Vistoria(empresa, vistoriador);
-			ControladorVistoria controladorV = ControladorVistoria.getInstance();
+		if (status.equals(Strings.rdDeferido)) {
+			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status);
 			controladorV.cadastrarVistoria(vistoria);
-		}else {
-			MessageAlert.mensagemErro(Strings.erroCadastro+"\n"+Strings.empresaNaoCadastrada);
+			limparCampos();
+		} else if (status.equals(Strings.rdIndeferido)) {
+			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, motivoIndeferido);
+			controladorV.cadastrarVistoria(vistoria);
+			limparCampos();
+		} else {
+			MessageAlert.mensagemErro(Strings.erroCadastro + "\n" + Strings.empresaNaoCadastrada);
 			return;
 		}
-
 	}
 
 	private void buscarDadosEmpresa(String nome) {
@@ -403,4 +413,74 @@ public class TVistoria extends Application {
 			MessageAlert.mensagemErro(Strings.empresaNaoEncontrada);
 		}
 	}
+
+	private void limparCampos() {
+
+		getTxfNome().setText("");
+		getTxfCnpj().setText("");
+		getTxfAreaTotalEdificacao().setText("");
+		getTxfAreaVistoriadaEdificacao().setText("");
+		getTxfBairro().setText("");
+		getTxfCep().setText("");
+		getTxfCidade().setText("");
+		getTxfNumero().setText("");
+		getTxfRua().setText("");
+		getTxaMotivo().setText("");
+		getComboBox().setValue(Strings.mensagemSelecioneVistoriador);
+		getRadioButtonDeferido().setSelected(false);
+		getRadioButtonIndeferido().setSelected(false);
+	}
+
+	private TextField getTxfNome() {
+		return txfNome;
+	}
+
+	private TextField getTxfCnpj() {
+		return txfCnpj;
+	}
+
+	private TextField getTxfRua() {
+		return txfRua;
+	}
+
+	private TextField getTxfBairro() {
+		return txfBairro;
+	}
+
+	private TextField getTxfCidade() {
+		return txfCidade;
+	}
+
+	private TextField getTxfCep() {
+		return txfCep;
+	}
+
+	private TextField getTxfNumero() {
+		return txfNumero;
+	}
+
+	private TextField getTxfAreaTotalEdificacao() {
+		return txfAreaTotalEdificacao;
+	}
+
+	private TextField getTxfAreaVistoriadaEdificacao() {
+		return txfAreaVistoriadaEdificacao;
+	}
+
+	private TextArea getTxaMotivo() {
+		return txaMotivo;
+	}
+
+	private JFXComboBox<String> getComboBox() {
+		return comboBox;
+	}
+
+	private RadioButton getRadioButtonDeferido() {
+		return radioButtonDeferido;
+	}
+
+	private RadioButton getRadioButtonIndeferido() {
+		return radioButtonIndeferido;
+	}
+
 }

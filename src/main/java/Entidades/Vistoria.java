@@ -9,8 +9,11 @@ public class Vistoria implements Taxa {
 	private double taxaVistoria;
 	private double areaTotalEdificacao;
 	private double areaVistoriada;
+	private String status;
+	private String motivoIndeferido;
 
-	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada) {
+	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
+			String status) {
 
 		if (empresa == null) {
 			throw new IllegalArgumentException(Strings.empresaVazio);
@@ -28,10 +31,52 @@ public class Vistoria implements Taxa {
 			throw new IllegalArgumentException(Strings.erroAreaVistoria);
 		}
 
+		if (status == null || status.isEmpty()) {
+			throw new IllegalArgumentException(Strings.erroStatus);
+		}
+		
+		taxaHabitese();
 		this.empresa = empresa;
 		this.vistoriador = vistoriador;
 		this.areaTotalEdificacao = areaTotalEdificacao;
 		this.areaVistoriada = areaVistoriada;
+		this.status = status;
+	}
+
+	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
+			String status, String motivoIndeferido) {
+
+		if (empresa == null) {
+			throw new IllegalArgumentException(Strings.empresaVazio);
+		}
+
+		if (vistoriador.isEmpty() || vistoriador == null) {
+			throw new IllegalArgumentException(Strings.vistoriadorVazio);
+		}
+
+		if (areaTotalEdificacao < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaTotalEdificacao);
+		}
+
+		if (areaVistoriada < 0) {
+			throw new IllegalArgumentException(Strings.erroAreaVistoria);
+		}
+
+		if (status == null || status.isEmpty()) {
+			throw new IllegalArgumentException(Strings.erroStatus);
+		}
+
+		if (motivoIndeferido.isEmpty() || motivoIndeferido == null) {
+			throw new IllegalArgumentException(Strings.erroMotivo);
+		}
+		
+		taxaHabitese();
+		this.empresa = empresa;
+		this.vistoriador = vistoriador;
+		this.areaTotalEdificacao = areaTotalEdificacao;
+		this.areaVistoriada = areaVistoriada;
+		this.status = status;
+		this.motivoIndeferido = motivoIndeferido;
 	}
 
 	public Empresa getEmpresa() {
@@ -77,6 +122,9 @@ public class Vistoria implements Taxa {
 
 	@Override
 	public void taxaHabitese() {
+		
+		taxaFuncionamento();
+		
 		if (this.areaTotalEdificacao > 100) {
 			this.areaTotalEdificacao = (this.areaTotalEdificacao * 0.69);
 		} else {
@@ -88,13 +136,6 @@ public class Vistoria implements Taxa {
 
 	public double getTaxaVistoria() {
 		return taxaVistoria;
-	}
-
-	public void setTaxaVistoria(double taxaVistoria) {
-		if (taxaVistoria <= 0) {
-
-		}
-		this.taxaVistoria = taxaVistoria;
 	}
 
 	public double getAreaTotalEdificacao() {
@@ -119,5 +160,31 @@ public class Vistoria implements Taxa {
 			throw new IllegalArgumentException(Strings.erroAreaVistoria);
 		}
 		this.areaVistoriada = areaVistoriada;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+
+		if (status == null || status.isEmpty()) {
+			throw new IllegalArgumentException(Strings.erroStatus);
+		}
+
+		this.status = status;
+	}
+
+	public String getMotivoIndeferido() {
+		return motivoIndeferido;
+	}
+
+	public void setMotivoIndeferido(String motivoIndeferido) {
+
+		if (motivoIndeferido.isEmpty() || motivoIndeferido == null) {
+			throw new IllegalArgumentException(Strings.erroMotivo);
+		}
+
+		this.motivoIndeferido = motivoIndeferido;
 	}
 }
