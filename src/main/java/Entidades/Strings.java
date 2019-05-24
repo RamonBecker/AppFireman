@@ -20,8 +20,10 @@ public class Strings {
 	public static final String btnBuscarEmpresa = "Buscar Empresa";
 	public static final String btnEnviar = "Enviar";
 	public static final String btnCadastrarVistoria = "Cadastrar Vistoria";
+	public static final String btnPagar = "Pagar";
 
 	// Erros
+	
 	public static final String aviso = "Aviso";
 	public static final String erro = "Erro";
 	public static final String erroImagem = "Imagem não encontrada";
@@ -82,6 +84,7 @@ public class Strings {
 	public static final String lbAreaVistoriada = "Área vistoriada";
 	public static final String lbMotivo = "Motivo do Indeferimento";
 	public static final String lbTaxa = "Taxas";
+	public static final String lbstatus = "Status";
 	
 	// Mensagens
 	public static final String mensagemEmpresa = "Empresa Cadastrada com sucesso";
@@ -99,7 +102,8 @@ public class Strings {
 	public static final String mensagemVistoriaCadastrada = "Vistoria cadastrada com sucesso";
 	public static final String mensagemSelecioneVistoriador = "Selecione o vistoriador";
 	public static final String mensagemTaxaGerada = "Taxa gerada";
-
+	public static final String mensagemVistoriaPaga = "Vistoria Paga";
+	
 	// RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";
 	public static final String rdDeferido = "Deferido";
@@ -120,5 +124,8 @@ public class Strings {
 
 	// DATE PICKER
 	public static final String dataSelecionada = "Selecione a data da vistoria";
+	
+	public static final String taxaHabitese = "taxaHabitese";
+	public static final String taxaFuncionamento = "taxaFuncionamento";
 
 }

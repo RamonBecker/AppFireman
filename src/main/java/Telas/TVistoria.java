@@ -5,11 +5,10 @@ import java.time.LocalDate;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
-
 import Alert.MessageAlert;
 import Controladores.ControladorEmpresa;
 import Controladores.ControladorVistoria;
-import Entidades.Empresa;
+import Entidades.Endereco;
 import Entidades.Strings;
 import Entidades.Vistoria;
 import javafx.application.Application;
@@ -66,7 +65,7 @@ public class TVistoria extends Application {
 	private RadioButton radioButtonIndeferido;
 	private ToggleGroup radioGroup;
 	private HBox hbox;
-	private Empresa empresa;
+	private Endereco endereco;
 	private String status;
 	private JFXComboBox<String> comboBox;
 	private JFXDatePicker datePicker;
@@ -316,9 +315,9 @@ public class TVistoria extends Application {
 
 		// AÇÃO DO BUTTON CADASTRAR
 
-		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(bmVistoriador.getText().trim(), empresa,
-				Double.parseDouble(txfAreaTotalEdificacao.getText()),
-
+		btnCadastrarVistoria.setOnAction(e -> acaoButtonCadastrar(txfNome.getText(), txfCnpj.getText(), endereco, bmVistoriador.getText()
+				
+				,Double.parseDouble(txfAreaTotalEdificacao.getText()),
 				Double.parseDouble(txfAreaVistoriadaEdificacao.getText()), status, txaMotivo.getText(), dataVistoria));
 
 		// AÇÃO DO DATEPICKER
@@ -408,17 +407,19 @@ public class TVistoria extends Application {
 		}
 	}
 
-	private void acaoButtonCadastrar(String vistoriador, Empresa empresa, double areaTotal, double areaVistoriada,
-			String status, String motivoIndeferido, String dataVistoria) {
+	private void acaoButtonCadastrar(String nome, String cnpj, Endereco endereco, String vistoriador,double areaTotal,
+			double areaVistoriada, String status, String motivoIndeferido, String dataVistoria) {
+		
 		ControladorVistoria controladorV = ControladorVistoria.getInstance();
 
 		if (status.equals(Strings.rdDeferido)) {
-			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, dataVistoria);
+			Vistoria vistoria = new Vistoria(nome, cnpj, endereco, vistoriador, areaTotal, areaVistoriada, status,
+					dataVistoria);
 			controladorV.cadastrarVistoria(vistoria);
 			limparCampos();
 		} else if (status.equals(Strings.rdIndeferido)) {
-			Vistoria vistoria = new Vistoria(empresa, vistoriador, areaTotal, areaVistoriada, status, motivoIndeferido,
-					dataVistoria);
+			Vistoria vistoria = new Vistoria(nome, cnpj, endereco, vistoriador, areaTotal, areaVistoriada, status,
+					motivoIndeferido, dataVistoria);
 			controladorV.cadastrarVistoria(vistoria);
 			limparCampos();
 		} else {
@@ -433,7 +434,7 @@ public class TVistoria extends Application {
 
 		if (controladorEmpresa.buscarEmpresa(nome)) {
 			int posicao = controladorEmpresa.getPosicao();
-			empresa = controladorEmpresa.getEmpresasCadastradas().get(posicao);
+			endereco = controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco();
 			txfBairro.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getBairro());
 			txfCidade.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getCidade());
 			txfNumero.setText(controladorEmpresa.getEmpresasCadastradas().get(posicao).getEndereco().getNumero());

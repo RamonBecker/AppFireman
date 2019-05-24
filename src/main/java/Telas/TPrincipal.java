@@ -158,7 +158,7 @@ public class TPrincipal extends Application {
 	private void acaoBotaoTaxa(JFXButton btnTaxa, Stage stage) {
 		
 		btnTaxa.setDefaultButton(false);
-		btnCadastroVistoria.setOnKeyPressed((KeyEvent t) -> {
+		btnTaxa.setOnKeyPressed((KeyEvent t) -> {
 			if (t.getCode() == KeyCode.ENTER) {
 				telaTaxa(stage);
 			}
@@ -172,7 +172,6 @@ public class TPrincipal extends Application {
 			stage.close();
 		} catch (Exception e) {
 			MessageAlert.mensagemErro(Strings.erroTela);
-			;
 			e.printStackTrace();
 		}
 	}

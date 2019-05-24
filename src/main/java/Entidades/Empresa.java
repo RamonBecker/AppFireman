@@ -34,16 +34,4 @@ public class Empresa extends PessoaJuridica {
 		}
 		this.telefone = telefone;
 	}
-
-	
-	
-	public Empresa(String nome, String cnpj) {
-		super(nome, cnpj);
-	}
-
-	@Override
-	public String toString() {
-		return "Empresa [telefone=" + telefone + "]";
-	}
-
 }

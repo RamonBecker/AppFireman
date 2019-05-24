@@ -108,7 +108,7 @@ public class TPesquisaEmpresa extends Application {
 		btnEnviar.setStyle(Strings.btnStyle);
 
 		tableView.setOnMouseClicked(e -> setarDadosTextField(txfNome, txfCNPJ, tableView));
-		btnEnviar.setOnAction(e -> acaoBotaoSelecionar(stage, txfNome.getText(), txfNome.getText()));
+		btnEnviar.setOnAction(e -> acaoBotaoSelecionar(stage, txfNome.getText(), txfCNPJ.getText()));
 
 		// DISABLE TEXT FIELDS
 		txfNome.setDisable(true);
@@ -140,19 +140,13 @@ public class TPesquisaEmpresa extends Application {
 
 	}
 
-	public ObservableList<Empresa> getEmpresa() {
+	private ObservableList<Empresa> getEmpresa() {
 
 		ObservableList<Empresa> empresaList = FXCollections.observableArrayList();
 		ControladorEmpresa auxControladorEmpresa = ControladorEmpresa.getInstance();
-		int tamVetor = auxControladorEmpresa.getEmpresasCadastradas().size();
-		Empresa empresa = null;
-
-		for (int i = 0; i < tamVetor; i++) {
-			empresa = new Empresa(auxControladorEmpresa.getEmpresasCadastradas().get(i).getNome(),
-					auxControladorEmpresa.getEmpresasCadastradas().get(i).getCnpj());
-			empresaList.add(empresa);
-		}
-
+		
+		empresaList.addAll(auxControladorEmpresa.getEmpresasCadastradas());
+		
 		return empresaList;
 	}
 

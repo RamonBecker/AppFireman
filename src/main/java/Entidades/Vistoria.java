@@ -4,21 +4,23 @@ import Alert.MessageAlert;
 
 public class Vistoria implements Taxa, Pagamento {
 
-	private Empresa empresa;
+	private String nome;
+	private String cnpj;
+	private Endereco endereco;
 	private String vistoriador;
-	private double taxaHabitese;
-	private double taxaFuncionamento;
+	private Double taxaHabitese;
+	private Double taxaFuncionamento;
 	private double areaTotalEdificacao;
 	private double areaVistoriada;
 	private String status;
 	private String motivoIndeferido;
 	private String dataVistoria;
 
-	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
-			String status, String dataVistoria) {
+	public Vistoria(String nome, String cnpj, Endereco endereco, String vistoriador, double areaTotalEdificacao,
+			double areaVistoriada, String status, String dataVistoria) {
 
-		if (empresa == null) {
-			throw new IllegalArgumentException(Strings.empresaVazio);
+		if (endereco == null) {
+			throw new IllegalArgumentException(Strings.enderecoVazio);
 		}
 
 		if (vistoriador.isEmpty() || vistoriador == null) {
@@ -42,19 +44,21 @@ public class Vistoria implements Taxa, Pagamento {
 		}
 
 		taxaHabitese();
-		this.empresa = empresa;
+		this.endereco = endereco;
 		this.vistoriador = vistoriador;
 		this.areaTotalEdificacao = areaTotalEdificacao;
 		this.areaVistoriada = areaVistoriada;
 		this.status = status;
 		this.dataVistoria = dataVistoria;
+		this.cnpj = cnpj;
+		this.nome = nome;
 	}
 
-	public Vistoria(Empresa empresa, String vistoriador, double areaTotalEdificacao, double areaVistoriada,
-			String status, String motivoIndeferido, String dataVistoria) {
+	public Vistoria(String nome, String cnpj, Endereco endereco, String vistoriador, double areaTotalEdificacao,
+			double areaVistoriada, String status, String motivoIndeferido, String dataVistoria) {
 
-		if (empresa == null) {
-			throw new IllegalArgumentException(Strings.empresaVazio);
+		if (endereco == null) {
+			throw new IllegalArgumentException(Strings.enderecoVazio);
 		}
 
 		if (vistoriador.isEmpty() || vistoriador == null) {
@@ -82,24 +86,15 @@ public class Vistoria implements Taxa, Pagamento {
 		}
 
 		taxaHabitese();
-		this.empresa = empresa;
+		this.endereco = endereco;
 		this.vistoriador = vistoriador;
 		this.areaTotalEdificacao = areaTotalEdificacao;
 		this.areaVistoriada = areaVistoriada;
 		this.status = status;
 		this.motivoIndeferido = motivoIndeferido;
 		this.dataVistoria = dataVistoria;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		if (empresa == null) {
-			throw new IllegalArgumentException(Strings.empresaVazio);
-		}
-		this.empresa = empresa;
+		this.cnpj = cnpj;
+		this.nome = nome;
 	}
 
 	public String getVistoriador() {
@@ -122,11 +117,12 @@ public class Vistoria implements Taxa, Pagamento {
 		if (this.areaVistoriada > 100) {
 
 			this.taxaFuncionamento = (this.areaVistoriada * 0.40);
-			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" "+Strings.de+" "+Strings.funcionamento);
+			MessageAlert.mensagemRealizadoSucesso(
+					Strings.mensagemTaxaGerada + " " + Strings.de + " " + Strings.funcionamento);
 		} else {
 			MessageAlert.mensagemRealizadoSucesso(
 					Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.funcionamento);
-			this.taxaFuncionamento = 40;
+			this.taxaFuncionamento = 40.0;
 		}
 	}
 
@@ -136,9 +132,10 @@ public class Vistoria implements Taxa, Pagamento {
 
 		if (this.areaTotalEdificacao > 100) {
 			this.taxaHabitese = (this.areaTotalEdificacao * 0.69);
-			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" "+Strings.de+" "+Strings.habitese);
+			MessageAlert
+					.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada + " " + Strings.de + " " + Strings.habitese);
 		} else {
-			this.areaTotalEdificacao = 69;
+			this.taxaHabitese = 69.0;
 			MessageAlert
 					.mensagemRealizadoSucesso(Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.habitese);
 		}
@@ -213,13 +210,15 @@ public class Vistoria implements Taxa, Pagamento {
 		this.dataVistoria = dataVistoria;
 	}
 
-	@Override
-	public String toString() {
-		return "Vistoria [empresa=" + empresa + ", vistoriador=" + vistoriador + ", taxaHabitese=" + taxaHabitese
-				+ ", taxaFuncionamento=" + taxaFuncionamento + ", areaTotalEdificacao=" + areaTotalEdificacao
-				+ ", areaVistoriada=" + areaVistoriada + ", status=" + status + ", motivoIndeferido=" + motivoIndeferido
-				+ ", dataVistoria=" + dataVistoria + "]";
+	public String getNome() {
+		return nome;
 	}
-	
-	
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
 }

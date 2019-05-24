@@ -1,7 +1,6 @@
 package Entidades;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 // REVER
 
 public enum ValidadorDocumento {
