@@ -1,12 +1,10 @@
 package Telas;
 
-import java.awt.ItemSelectable;
+
 
 import com.jfoenix.controls.JFXButton;
-
 import Alert.MessageAlert;
 import Controladores.ControladorVistoria;
-import Entidades.Empresa;
 import Entidades.Strings;
 import Entidades.Vistoria;
 import javafx.application.Application;
@@ -218,6 +216,8 @@ public class TTaxa extends Application {
 
 		btnPagar.setOnAction(e -> {
 			Vistoria itemSelecionado = tableview.getSelectionModel().getSelectedItem();
+			itemSelecionado.pagarFuncionamento(Double.parseDouble(getTxfFuncionamento().getText()));
+			itemSelecionado.pagarHabitese(Double.parseDouble(getTxfHabitese().getText()));
 			tableview.getItems().remove(itemSelecionado);
 			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVistoriaPaga);
 			limparCampos();

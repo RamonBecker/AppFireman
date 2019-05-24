@@ -2,5 +2,6 @@ package Entidades;
 
 public interface Pagamento {
 	
-	void pagarBoleto(double valor, String data);
+	void pagarFuncionamento(double valor);
+	void pagarHabitese(double valor);
 }

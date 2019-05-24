@@ -109,9 +109,6 @@ public class Vistoria implements Taxa, Pagamento {
 		this.vistoriador = vistoriador;
 	}
 
-	public void pagarBoleto(double valor, String data) {
-	}
-
 	public void taxaFuncionamento() {
 
 		if (this.areaVistoriada > 100) {
@@ -141,6 +138,16 @@ public class Vistoria implements Taxa, Pagamento {
 		}
 	}
 
+	public void pagarFuncionamento(double valor) {
+		this.taxaFuncionamento = valor - taxaFuncionamento;
+	}
+	
+	public void pagarHabitese(double valor) {
+		this.taxaHabitese = valor - taxaHabitese;
+	}
+	
+	
+	
 	public double getTaxaHabitese() {
 		return taxaHabitese;
 	}
@@ -221,4 +228,6 @@ public class Vistoria implements Taxa, Pagamento {
 	public Endereco getEndereco() {
 		return endereco;
 	}
+
+	
 }
