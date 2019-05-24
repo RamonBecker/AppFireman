@@ -25,7 +25,6 @@ public class ControladorVistoria {
 
 	public void cadastrarVistoria(Vistoria vistoria) {
 		this.vistoria.add(vistoria);
-		System.out.println(this.vistoria);
 		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemVistoriaCadastrada);
 	}
 
