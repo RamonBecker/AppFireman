@@ -96,6 +96,7 @@ public  class  Strings {
 	public static final String de = "de";
 	public static final String mensagemVistoriaCadastrada = "Vistoria cadastrada com sucesso";
 	public static final String mensagemSelecioneVistoriador = "Selecione o vistoriador";
+	public static final String mensagemTaxaGerada = "Taxa gerada";
 	
 	//RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";

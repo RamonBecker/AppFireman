@@ -114,16 +114,15 @@ public class Vistoria implements Taxa {
 		this.vistoriador = vistoriador;
 	}
 
-	@Override
 	public void pagarBoleto(double valor, String data) {
 	}
 
-	@Override
 	public void taxaFuncionamento() {
 
 		if (this.areaVistoriada > 100) {
 
 			this.taxaFuncionamento = (this.areaVistoriada * 0.40);
+			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" ");
 		} else {
 			MessageAlert.mensagemRealizadoSucesso(
 					Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.funcionamento);
@@ -131,13 +130,13 @@ public class Vistoria implements Taxa {
 		}
 	}
 
-	@Override
 	public void taxaHabitese() {
 
 		taxaFuncionamento();
 
 		if (this.areaTotalEdificacao > 100) {
 			this.taxaHabitese = (this.areaTotalEdificacao * 0.69);
+			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" "+Strings.de+" "+Strings.habitese);
 		} else {
 			this.areaTotalEdificacao = 69;
 			MessageAlert
