@@ -224,6 +224,9 @@ public class TVistoria extends Application {
 		txfCidade.setDisable(true);
 		txfRua.setDisable(true);
 		txaMotivo.setDisable(true);
+		txfAreaTotalEdificacao.setDisable(true);
+		txfAreaVistoriadaEdificacao.setDisable(true);
+		btnCadastrarVistoria.setDisable(true);
 
 		// CRIANDO GROUP DE RADIOBUTTONS
 		radioButtonDeferido = new RadioButton(Strings.rdDeferido);
@@ -268,6 +271,9 @@ public class TVistoria extends Application {
 			txfNome.setText(nome);
 			txfCnpj.setText(cnpj);
 			buscarDadosEmpresa(nome);
+			txfAreaTotalEdificacao.setDisable(false);
+			txfAreaVistoriadaEdificacao.setDisable(false);
+			btnCadastrarVistoria.setDisable(false);
 		}
 		// ACAO DA SCENE COM TECLA DE ATALHO
 		scene.setOnKeyPressed((KeyEvent t) -> {

@@ -22,14 +22,15 @@ public class TPrincipal extends Application {
 	private String usuario;
 	private JFXButton btnCadastroEmpresa;
 	private JFXButton btnCadastroVistoria;
+	private JFXButton btnTaxa;
 	private Label labelCadastroEmpresa;
 	private Label labelCadastroVistoria;
+	private Label labelTaxa;
 	private Menu menu;
 	private MenuItem menuItemSair;
 	private MenuBar menuBar;
 	private VBox vBox;
-	
-	
+
 	public TPrincipal(String usuario) {
 		this.usuario = usuario;
 	}
@@ -76,12 +77,26 @@ public class TPrincipal extends Application {
 		labelCadastroVistoria.setLayoutX(230);
 		labelCadastroVistoria.setLayoutY(235);
 
+		// CRIANDO BUTTON TAXA
+		btnTaxa = new JFXButton();
+		ImageView imgLogoTaxa = new ImageView(ControladorImagem.carregarImagem(Strings.urlImagem, Strings.urlLogoTaxa));
+		imgLogoTaxa.setFitHeight(70);
+		imgLogoTaxa.setFitWidth(70);
+		btnTaxa.setGraphic(imgLogoTaxa);
+		btnTaxa.setLayoutX(357);
+		btnTaxa.setLayoutY(150);
+
+		// CRIANDO LABEL Taxa
+		labelTaxa = new Label(Strings.lbTaxa);
+		labelTaxa.setLayoutX(367);
+		labelTaxa.setLayoutY(235);
+
 		// ADICIONANDO MENU
-		 menu = new Menu(Strings.titleMenu);
-		 menuItemSair = new MenuItem(Strings.titleSair);
+		menu = new Menu(Strings.titleMenu);
+		menuItemSair = new MenuItem(Strings.titleSair);
 
 		menu.getItems().add(menuItemSair);
-		 menuBar = new MenuBar();
+		menuBar = new MenuBar();
 
 		menuBar.getMenus().add(menu);
 		vBox = new VBox(1, menuBar);
@@ -94,20 +109,22 @@ public class TPrincipal extends Application {
 		pane.getChildren().add(labelCadastroEmpresa);
 		pane.getChildren().add(labelCadastroVistoria);
 		pane.getChildren().add(vBox);
+		pane.getChildren().add(btnTaxa);
+		pane.getChildren().add(labelTaxa);
 
 		// AÇÕES DOS BOTÕES
 
-		//AÇÃO DO BOTÃO EMPRESA
+		// AÇÃO DO BOTÃO EMPRESA
 		acaoBotaoEmpresa(btnCadastroEmpresa, stage);
-		
+
 		// AÇÃO DO MENU SAIR
 		menuItemSair.setOnAction(e -> sair(stage));
 
-		
-		//AÇAÕ BOTAO VISTORIA
+		// AÇAÕ BOTAO VISTORIA
 		acaoBotaoVistoria(btnCadastroVistoria, stage);
-
-	
+		
+		// AÇAÕ BOTAO Taxa
+		acaoBotaoTaxa(btnTaxa, stage);
 		
 		stage.setScene(scene);
 		stage.show();
@@ -125,8 +142,7 @@ public class TPrincipal extends Application {
 		btnCadastroEmpresa.setOnAction(e -> telaEmpresa(stage));
 
 	}
-	
-	
+
 	private void acaoBotaoVistoria(JFXButton btnCadastroVistoria, Stage stage) {
 
 		btnCadastroVistoria.setDefaultButton(false);
@@ -139,6 +155,17 @@ public class TPrincipal extends Application {
 
 	}
 
+	private void acaoBotaoTaxa(JFXButton btnTaxa, Stage stage) {
+		
+		btnTaxa.setDefaultButton(false);
+		btnCadastroVistoria.setOnKeyPressed((KeyEvent t) -> {
+			if (t.getCode() == KeyCode.ENTER) {
+				telaTaxa(stage);
+			}
+		});
+		btnTaxa.setOnAction(e -> telaTaxa(stage));
+	}
+
 	private void telaEmpresa(Stage stage) {
 		try {
 			new TEmpresa(usuario).start(new Stage());
@@ -149,21 +176,33 @@ public class TPrincipal extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void telaVistoria(Stage stage) {
-		
+
 		try {
-			
+
 			new TVistoria(usuario).start(new Stage());
 			stage.close();
 		} catch (Exception e) {
 			MessageAlert.mensagemErro(Strings.erroTela);
 			e.printStackTrace();
-		};
+		}
+		;
 	}
 
 	private void sair(Stage stage) {
 		stage.close();
 		MessageAlert.mensagemRealizadoSucesso(Strings.mensagemSair);
+	}
+
+	private void telaTaxa(Stage stage) {
+
+		try {
+			new TTaxa(usuario).start(new Stage());
+			stage.close();
+		} catch (Exception e) {
+			MessageAlert.mensagemErro(Strings.erroTela);
+			e.printStackTrace();
+		}
 	}
 }

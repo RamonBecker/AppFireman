@@ -19,6 +19,8 @@ public class TTaxa extends Application {
 		pane.setPrefSize(700, 600);
 		Scene scene = new Scene(pane);
 
+		
+		
 		stage.setScene(scene);
 		stage.show();
 	}

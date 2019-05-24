@@ -2,15 +2,15 @@ package Entidades;
 
 import java.util.ArrayList;
 
-public  class  Strings {
-	
-	//Title
+public class Strings {
+
+	// Title
 	public static final String titleLogin = "Login";
 	public static final String titleMenu = "Menu";
 	public static final String titleVoltar = "Voltar";
 	public static final String titleSair = "Sair";
-	
-	//Botoes
+
+	// Botoes
 	public static final String btnLogin = "Entrar";
 	public static final String btnCadastroEmpresas = "Cadastrar Empresas";
 	public static final String btnCadastroVistorias = "Vistorias";
@@ -20,8 +20,8 @@ public  class  Strings {
 	public static final String btnBuscarEmpresa = "Buscar Empresa";
 	public static final String btnEnviar = "Enviar";
 	public static final String btnCadastrarVistoria = "Cadastrar Vistoria";
-	
-	//Erros
+
+	// Erros
 	public static final String aviso = "Aviso";
 	public static final String erro = "Erro";
 	public static final String erroImagem = "Imagem não encontrada";
@@ -53,8 +53,8 @@ public  class  Strings {
 	public static final String erroStatus = "O status não pode ser vazio";
 	public static final String erroMotivo = "O motivo não pode ser vazio;";
 	public static final String erroDataVazio = "A data não pode ser vazio";
-	
-	//Arquivos Imagens
+
+	// Arquivos Imagens
 	public static final String urlImagem = "src/main/java/Imagem/";
 	public static final String urlLogoUsuario = "LogoUsuario.png";
 	public static final String urlLogoSenha = "LogoSenha.png";
@@ -62,8 +62,9 @@ public  class  Strings {
 	public static final String urlLogoCadastroEmpresa = "LogoCadastroEmpresa.png";
 	public static final String urlLogoCadastroVistoria = "LogoCadastroVistoria.png";
 	public static final String urlLogoSair = "LogoSair.png";
-	
-	//LABELS
+	public static final String urlLogoTaxa = "LogoTaxa.png";
+
+	// LABELS
 	public static final String lbNome = "Nome";
 	public static final String lbCnpj = "CNPJ";
 	public static final String lbNomefantasia = "Nome fantasia";
@@ -80,8 +81,9 @@ public  class  Strings {
 	public static final String lbAreaTotalEdificacao = "Área total da edificacao";
 	public static final String lbAreaVistoriada = "Área vistoriada";
 	public static final String lbMotivo = "Motivo do Indeferimento";
+	public static final String lbTaxa = "Taxas";
 	
-	//Mensagens
+	// Mensagens
 	public static final String mensagemEmpresa = "Empresa Cadastrada com sucesso";
 	public static final String mensagemCPF = "CPF válido";
 	public static final String mensagemCNPJ = "CNPJ válido";
@@ -97,26 +99,26 @@ public  class  Strings {
 	public static final String mensagemVistoriaCadastrada = "Vistoria cadastrada com sucesso";
 	public static final String mensagemSelecioneVistoriador = "Selecione o vistoriador";
 	public static final String mensagemTaxaGerada = "Taxa gerada";
-	
-	//RADIO BUTTONS
+
+	// RADIO BUTTONS
 	public static final String rdIndeferido = "Indeferido";
 	public static final String rdDeferido = "Deferido";
-	
-	//Styles button
+
+	// Styles button
 	public static final String txfTexfieldJFXColor = "-jfx-focus-color: red;";
 	public static final String txfTexfieldFonte = "-fx-font: 16px Arial;";
 	public static final String btnStyle = "-fx-padding: 0.7em 0.57em; -fx-font-size: 14px;-jfx-button-type: RAISED;-fx-background-color: rgb(155, 10, 7);-fx-pref-width: 150;-fx-text-fill: WHITE;";
 	public static final String lbStyle = "-fx-font-size: 14px;";
-	
-	//COMBO BOX NOMES
+
+	// COMBO BOX NOMES
 	public static final ArrayList<String> bmVistoriador = new ArrayList<String>() {
 		{
 			add("BM Willian");
 			add("BM Carlos");
 		}
 	};
-	
-	//DATE PICKER 
+
+	// DATE PICKER
 	public static final String dataSelecionada = "Selecione a data da vistoria";
-	
+
 }

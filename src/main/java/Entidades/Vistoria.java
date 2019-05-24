@@ -2,7 +2,7 @@ package Entidades;
 
 import Alert.MessageAlert;
 
-public class Vistoria implements Taxa {
+public class Vistoria implements Taxa, Pagamento {
 
 	private Empresa empresa;
 	private String vistoriador;
@@ -41,7 +41,7 @@ public class Vistoria implements Taxa {
 			throw new IllegalArgumentException(Strings.erroDataVazio);
 		}
 
-		// taxaHabitese();
+		taxaHabitese();
 		this.empresa = empresa;
 		this.vistoriador = vistoriador;
 		this.areaTotalEdificacao = areaTotalEdificacao;
@@ -122,7 +122,7 @@ public class Vistoria implements Taxa {
 		if (this.areaVistoriada > 100) {
 
 			this.taxaFuncionamento = (this.areaVistoriada * 0.40);
-			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" ");
+			MessageAlert.mensagemRealizadoSucesso(Strings.mensagemTaxaGerada+" "+Strings.de+" "+Strings.funcionamento);
 		} else {
 			MessageAlert.mensagemRealizadoSucesso(
 					Strings.mensagemTaxaMinima + " " + Strings.de + " " + Strings.funcionamento);
